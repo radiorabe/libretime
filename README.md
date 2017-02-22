@@ -12,3 +12,15 @@ Feel free to comment on the main LibreTime repo it you would like us to prioriti
 we will look what we can do.
 
 This README.md is on the orphan branch `rabe` in this fork. Any changes to the branch will never get merged to upstream.
+
+If you want to clone the master branch you can to the following:
+
+```bash
+git clone -b master --depth=100  git@github.com:radiorabe/libretime.git
+```
+
+This also creates a shallow clone only containing the last 100 refs, this way the initial clones is much faster. If you ever want the complete history locally, you need to unshallow your working copy:
+
+```bash
+git fetch --unshallow
+```
