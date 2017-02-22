@@ -19,7 +19,7 @@ If you want to clone the master branch you can to the following:
 git clone -b master --depth=100  git@github.com:radiorabe/libretime.git
 ```
 
-This also creates a shallow clone only containing the last 100 refs, this way the initial clones is much faster. If you ever want the complete history locally, you need to unshallow your working copy:
+This also creates a shallow clone only containing the last 100 refs, this way the initial clone is much faster. If you ever want the complete history locally, you need to unshallow your working copy:
 
 ```bash
 git fetch --unshallow
