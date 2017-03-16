@@ -92,6 +92,16 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
                 array('regex', false, array('/^[^ &<>]+$/', 'messages' => _('Invalid character entered')))));
         $this->addElement($masterSourceMount);
 
+        // dummy hidden field used to hold RawHtml decorator
+        $masterSourceQr = new Zend_Form_Element_Hidden('master_source_qr', array(
+            'label' => _('Master Source QR Code:'),
+            'value' => Application_Model_Qr::getMasterSourceQr(),
+            'decorators' => array(
+                new Airtime_Decorator_RawHtml()
+            )
+        ));
+        $this->addElement($masterSourceQr);
+
         $showSourceParams = parse_url(Application_Model_Preference::GetLiveDJSourceConnectionURL());
 
         // Show source connection url parameters
@@ -118,6 +128,26 @@ class Application_Form_LiveStreamingPreferences extends Zend_Form_SubForm
             ->setValidators(array(
                 array('regex', false, array('/^[^ &<>]+$/', 'messages' => _('Invalid character entered')))));
         $this->addElement($showSourceMount);
+
+        // dummy hidden field used to hold RawHtml decorator
+        $showSourceQr = new Zend_Form_Element_Hidden('show_source_qr', array(
+            'label' => _('Show Source QR Code:'),
+            'value' => Application_Model_Qr::getShowSourceQr(),
+            'decorators' => array(
+                new Airtime_Decorator_RawHtml()
+            )
+        ));
+        $this->addElement($showSourceQr);
+
+        // demo only code
+        if ($isDemo) {
+            $elements = $this->getElements();
+            foreach ($elements as $element) {
+                if ($element->getType() != 'Zend_Form_Element_Hidden') {
+                    $element->setAttrib("disabled", "disabled");
+                }
+            }
+        }
     }
 
     public function updateVariables()

@@ -185,6 +185,9 @@ final class LocaleController extends Zend_Controller_Action
             "Check this box to automatically switch on Master/Show source upon source connection." => _("Check this box to automatically switch on Master/Show source upon source connection."),
             "If your Icecast server expects a username of 'source', this field can be left blank." => _("If your Icecast server expects a username of 'source', this field can be left blank."),
             "If your live streaming client does not ask for a username, this field should be 'source'." => _("If your live streaming client does not ask for a username, this field should be 'source'."),
+            "If your live streaming client supports QR configuration, you may take a snapshot of the provided code for configuration." => _("If your live streaming client supports QR configuration, you may take a snapshot of the provided code for configuration."),
+            "You should treat the master source QR code like a password since the stream password is encoded in the contained URL." => _("You should treat the master source QR code like a password since the stream password is encoded in the contained URL."),
+            "For security reasons the username/password is not contained in the show QR code. DJ need to enter their login manually after configuration" => _("For security reasons the username/password is not contained in the show QR code. DJ need to enter their login manually after configuration"),
             "WARNING: This will restart your stream and may cause a short dropout for your listeners!" => _("WARNING: This will restart your stream and may cause a short dropout for your listeners!"),
             "This is the admin username and password for Icecast/SHOUTcast to get listener statistics." => _("This is the admin username and password for Icecast/SHOUTcast to get listener statistics."),
             //preferences/support-setting.js

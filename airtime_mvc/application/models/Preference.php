@@ -1130,12 +1130,21 @@ class Application_Model_Preference
         self::setValue("master_dj_source_connection_url", $value, false);
     }
 
-    public static function GetMasterDJSourceConnectionURL()
+    /**
+     * @param Boolean $secure set to false to get an URL with Username/Password
+     */
+    public static function GetMasterDJSourceConnectionURL($secure=true)
     {
         $master_connection_url = self::getValue("master_dj_source_connection_url");
         if ($master_connection_url == "") {
             $master_connection_url = "http://".$_SERVER['SERVER_NAME'].":".  Application_Model_StreamSetting::getMasterLiveStreamPort() . Application_Model_StreamSetting::getMasterLiveStreamMountPoint();
-            }
+        }
+        if ($secure === false) {
+            $master_connection_url = http_build_url(array_merge(parse_url($master_connection_url), array(
+                'user' => self::GetLiveStreamMasterUsername(),
+                'pass' => self::GetLiveStreamMasterPassword()
+            )));
+        }
 
         return $master_connection_url;
 

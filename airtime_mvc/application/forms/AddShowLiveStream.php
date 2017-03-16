@@ -62,6 +62,16 @@ class Application_Form_AddShowLiveStream extends Zend_Form_SubForm
             ->setValue(isset($showSourceParams["path"])?$showSourceParams["path"]:"");
         $this->addElement($showSourceMount);
 
+        // dummy hidden field used to hold RawHtml decorator
+        $showSourceQr = new Zend_Form_Element_Hidden('show_source_qr', array(
+            'label' => _('QR:'),
+            'value' => Application_Model_Qr::getShowSourceQr(true),
+            'decorators' => array(
+                new Airtime_Decorator_RawHtml()
+            )
+        ));
+        $this->addElement($showSourceQr);
+
         $this->setDecorators(
             array(
                 array('ViewScript', array('viewScript' => 'form/add-show-live-stream.phtml'))

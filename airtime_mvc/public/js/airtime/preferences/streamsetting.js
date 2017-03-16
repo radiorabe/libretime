@@ -400,7 +400,52 @@ function setupEventListeners() {
             at: "right center"
         },
     });
-    
+
+    $(".master_source_qr_help_icon").qtip({
+        content: {
+            text: $.i18n._("If your live streaming client supports QR configuration, you may take a snapshot of the provided code for configuration.").concat(' ').concat(
+                $.i18n._("You should treat the master source QR code like a password since the stream password is encoded in the contained URL.")
+            )
+        },
+        hide: {
+            delay: 500,
+            fixed: true
+        },
+        style: {
+            border: {
+                width: 0,
+                radius: 4
+            },
+            classes: "ui-tooltip-dark ui-tooltip-rounded"
+        },
+        position: {
+            my: "left bottom",
+            at: "right center"
+        },
+    });
+    $(".show_source_qr_help_icon").qtip({
+        content: {
+            text: $.i18n._("If your live streaming client supports QR configuration, you may take a snapshot of the provided code for configuration.").concat(' ').concat(
+                $.i18n._("For security reasons the username/password is not contained in the show QR code. DJ need to enter their login manually after configuration")
+            )
+        },
+        hide: {
+            delay: 500,
+            fixed: true
+        },
+        style: {
+            border: {
+                width: 0,
+                radius: 4
+            },
+            classes: "ui-tooltip-dark ui-tooltip-rounded"
+        },
+        position: {
+            my: "left bottom",
+            at: "right center"
+        },
+    });
+  
     $(".stream_type_help_icon").qtip({
     	content: {
             text: sprintf(

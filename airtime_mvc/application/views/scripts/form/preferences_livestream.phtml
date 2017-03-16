@@ -24,6 +24,8 @@
             </span>
             <?php echo $this->element->getElement("master_source_port")->render() ?>
             <?php echo $this->element->getElement("master_source_mount")->render() ?>
+            <?php echo $this->element->getElement("master_source_qr")->render() ?>
+            <span class="master_source_qr_help_icon"></span>
         </fieldset>
 
         <fieldset class="padded stream-setting-global" style="margin-top: 15px">
@@ -42,6 +44,8 @@
             </span>
             <?php echo $this->element->getElement("show_source_port")->render() ?>
             <?php echo $this->element->getElement("show_source_mount")->render() ?>
+            <?php echo $this->element->getElement("show_source_qr")->render() ?>
+            <span class="show_source_qr_help_icon"></span>
         </fieldset>
     </dl>
 </fieldset>

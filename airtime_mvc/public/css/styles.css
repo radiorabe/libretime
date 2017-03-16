@@ -156,7 +156,7 @@ select {
     margin-left: 7px !important;
 }
 
-.override_help_icon, .icecast_metadata_help_icon, .master_username_help_icon {
+.override_help_icon, .icecast_metadata_help_icon, .master_username_help_icon, .master_source_qr_help_icon, .show_source_qr_help_icon  {
     cursor: help;
     position: relative;
 
@@ -4384,4 +4384,9 @@ li .ui-state-hover {
 .upgrade-cta-button a {
     text-decoration: none;
     color: #f0f0f0;
+}
+
+.qr-code-right {
+    text-align: right;
+    font-size: 0.8em;
 }

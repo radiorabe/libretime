@@ -27,3 +27,15 @@ class Airtime_Decorator_Admin_Only extends Zend_Form_Decorator_Abstract
         }
     }
 }
+
+/** Output the raw contents of the form element as html **/
+class Airtime_Decorator_RawHtml extends Zend_Form_Decorator_Abstract
+{
+    protected $_format = '<dt><label>%s</label></dt><dd>%s</dd>';
+
+    public function render($content)
+    {
+        $element = $this->getElement();
+        return sprintf($this->_format, $element->getLabel(), $element->getValue());
+    }
+}
