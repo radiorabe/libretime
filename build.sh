@@ -1,5 +1,5 @@
 #!/bin/bash -e
-composer install
+composer --ignore-platform-reqs install
 
 git_build=""
 if [ -d .git ]; then
