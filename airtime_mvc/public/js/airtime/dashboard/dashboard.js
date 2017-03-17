@@ -451,6 +451,16 @@ function kickSource(ele){
     });
 }
 
+function showSourceInfo() {
+    $("#show_source_info").dialog({
+        title: $.i18n._('Show Source'),
+        resizable: false,
+        modal: true,
+        width: "auto",
+        height: "auto"
+    });
+}
+
 var stream_window = null;
 
 function init() {

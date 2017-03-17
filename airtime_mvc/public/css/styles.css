@@ -4390,3 +4390,12 @@ li .ui-state-hover {
     text-align: right;
     font-size: 0.8em;
 }
+
+#live_dj_div a {
+    text-decoration: none;
+    color: #bdbdbd;
+}
+
+#show_source_info p, #show_source_info pre {
+    text-align: center;
+}

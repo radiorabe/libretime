@@ -32,9 +32,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <?php echo $this->versionNotify();
             $sss = $this->SourceSwitchStatus();
             $scs = $this->SourceConnectionStatus();
+            $ssh = $this->ShowSourceHelp();
     ?>
     <?php echo $this->partial('partialviews/header.phtml', array("live_dj_switch"=>$sss['live_dj'], "live_dj_connection"=>$scs['live_dj'], "master_dj_switch"=>$sss['master_dj'], "master_dj_connection"=>$scs['master_dj'],
-                "scheduled_play_switch"=>$sss['scheduled_play'])) ?>
+                "scheduled_play_switch"=>$sss['scheduled_play'], 'live_dj_url' => $ssh['live_dj_url'], 'live_dj_qr' => $ssh['live_dj_qr'])) ?>
 <?php 	$partial = array('menu.phtml', 'default');
     $this->navigation()->menu()->setPartial($partial); ?>
 

@@ -36,11 +36,16 @@
       <li>
         <div id="live_dj_div" class="source-label">
         <a id="live_dj" class="source-kick-button" onclick="kickSource(this)"></a>
-          <?php echo _("Show Source")?>
+          <a href="#" onclick="showSourceInfo()"><?php echo _("Show Source")?></a>
         </div>
         <div class="line-to-switch"></div>
         <a href="#" id="live_dj" class="source-switch-button" onclick="setSwitchListener(this);"><span><?php echo $this->live_dj_switch?></span></a>
         <div class="line-to-on-air"></div>
+        <div id="show_source_info" style="display:none">
+            <p><?php echo _("DJs can use these settings to connect with compatible software and broadcast live during assigned shows using their LibreTime username and password."); ?></p>
+            <p><code><?php echo $this->live_dj_url; ?></code></p>
+            <?php echo $this->live_dj_qr; ?>
+        </div>
       </li>
     </ul>
   </div>
