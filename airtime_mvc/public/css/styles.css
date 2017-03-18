@@ -4386,6 +4386,10 @@ li .ui-state-hover {
     color: #f0f0f0;
 }
 
+.qr-code {
+    background: white;
+    color: black;
+}
 .qr-code-right {
     text-align: right;
     font-size: 0.8em;

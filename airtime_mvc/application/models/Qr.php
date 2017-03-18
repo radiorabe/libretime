@@ -11,9 +11,11 @@ final class Application_Model_Qr {
 
     private static function renderUrl($url, $rightAlign = false) {
         $renderer = new \BaconQrCode\Renderer\Text\Html;
+        $class = 'qr-code';
         if ($rightAlign) {
-            $renderer->setClass('qr-code-right');
+            $class .= ' qr-code-right';
         }
+        $renderer->setClass($class);
         $writer = new \BaconQrCode\Writer($renderer);
 
         return $writer->writeString($url);
