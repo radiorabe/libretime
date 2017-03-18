@@ -24,6 +24,7 @@
 
 %define _version     3.0.0-alpha
 %define _rpm_version 3.0.0.alpha
+%define legacy_name  airtime
 
 Name:           libretime
 Version:        %{_rpm_version}
@@ -53,6 +54,15 @@ BuildRequires: python-vine
 BuildRequires: python-requests
 BuildRequires: systemd
 
+# add all subpackages to base package for all-in-one installs
+Requires: %{name}-web
+Requires: %{name}-utils
+Requires: %{name}-analyzer
+Requires: %{name}-api_clients
+Requires: %{name}-pypo
+Requires: %{name}-icecast
+Requires: %{name}-celery
+
 %description
 LibreTime makes it easy to run your own online or terrestrial
 radio station. It is a community managed fork of the AirTime
@@ -69,7 +79,7 @@ from around the globe that use, document and improve LibreTime.
 rm -rf $RPM_BUILD_ROOT
 
 # Install system directories
-install -d %{buildroot}/%{_sysconfdir}/airtime
+install -d %{buildroot}/%{_sysconfdir}/%{legacy_name}
 install -d %{buildroot}/%{_unitdir}
 
 # isntall all the systemd units from centos-rpm repo
@@ -94,7 +104,7 @@ EOF
 
 # setup apache
 install -d %{buildroot}/etc/httpd/conf.d
-cat << EOF > %{buildroot}/etc/httpd/conf.d/airtime-fallback.conf
+cat << EOF > %{buildroot}/etc/httpd/conf.d/%{name}-fallback.conf
 <Directory "/var/www/html/">
     FallbackResource /index.php
 </Directory>
@@ -125,7 +135,7 @@ mkdir -p $PYTHONPATH
 pushd python_apps/airtime_analyzer
 python setup.py build --no-init-script
 python setup.py install --no-init-script --prefix=$RPM_BUILD_ROOT/${_prefix}usr --install-lib=$PYTHONPATH --single-version-externally-managed --record=installed.pth
-mkdir -p $RPM_BUILD_ROOT/${_prefix}etc/airtime/
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/%{legacy_name}
 popd
 install -d %{buildroot}/%{_tmppath}/airtime/airtime_analyzer
 
@@ -154,14 +164,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc README.md CREDITS LICENSE LICENSE_3RD_PARTY
-%dir %{_sysconfdir}/airtime
-%dir %{_tmppath}/airtime
+# add conf and tmp so they are not grabbed by a later package
+%dir %{_sysconfdir}/%{legacy_name}
+%dir %{_tmppath}/%{legacy_name}
 
-
-%changelog
-
+# Web Subpackage
 %package web
-Summary: radio rabe airtime web interface installation
+Summary: LibreTime Web Interface and API
+
+Provides: %{legacy_name}-web
 
 Requires: php
 Requires: php-pdo
@@ -174,19 +185,22 @@ Requires: httpd
 Requires: liquidsoap
 
 %description web
-Installs the airtime web interface into /var/www.
+The main LibreTime web and API interface in /var/www.
 
 %files web
 %config(noreplace) /var/www/application/configs/application.ini
 %config(noreplace) /etc/php.d/*.ini
-%config(noreplace) /etc/httpd/conf.d/airtime-fallback.conf
+%config(noreplace) /etc/httpd/conf.d/%{name}-fallback.conf
 /var/www/
 
+# Utils Subpackage
 %package utils
-Summary: radio rabe airtime utils installation
+Summary: LibreTime Utility Scripts
+
+Provides: %{legacy_name}-utils
 
 %description utils
-Installs the various utils neeeded by airtime to d stuff on the cli.
+Various small commandline utils for use with LibreTime.
 
 %files utils
 /usr/sbin/airtime-backup.py
@@ -195,14 +209,12 @@ Installs the various utils neeeded by airtime to d stuff on the cli.
 /usr/sbin/airtime-import
 /usr/bin/airtime-test-*
 
-
-
+# Analyzer Subpackage
 %package analyzer
 Summary: LibreTime Media Analyzer component
 
 AutoReqProv: no
 
-Requires: %{name} = %{version}-%{release}
 Requires: python
 Requires: pytz
 Requires: python-mutagen
@@ -221,7 +233,7 @@ Requires: lsof
 %{?systemd_requires}
 
 %description analyzer
-airtime analyzer imports uploaded files and watches directories
+LibreTime analyzer imports uploaded files.
 
 %pre analyzer
 getent group airtime-analyzer >/dev/null || groupadd -r airtime-analyzer
@@ -245,26 +257,29 @@ exit 0
 %{_bindir}/airtime_analyzer
 %{_libdir}/python2.7/site-packages/airtime_analyzer*
 
-
+# API Clients Subpackage
 %package api_clients
-Summary: radio rabe airtime python api clients
+Summary: LibreTime Python API Clients
 
 AutoReqProv: no
+
+Provides: %{legacy_name}-api_clients
 
 Requires: python
 
 %description api_clients
-airtime python api client library
+Python api_clients module for LibreTime.
 
 %files api_clients
 /usr/lib64/python2.7/site-packages/api_clients*
 
-
-
+# Python Playout Subpackage
 %package pypo
-Summary: radio rabe airtime pypo installation
+Summary: LibreTime Playout
 
 AutoReqProv: no
+
+Provides: %{legacy_name}-pypo
 
 Requires: python
 Requires: python-requests
@@ -278,12 +293,11 @@ Requires: python-mutagen
 Requires: python-kombu
 Requires: python-amqplib
 Requires: python-vine
-Requires: airtime-api_clients
+Requires: %{name}-api_clients
 %{?systemd_requires}
 
 %description pypo
-Python Play-Out for airtime calls liquidsoap as defined in airtime.
-
+Python Play-Out for LibreTime interfaces with the API and runs Liquidsoap.
 
 %pre pypo
 getent group airtime-pypo >/dev/null || groupadd -r airtime-pypo
@@ -304,7 +318,6 @@ exit 0
 %systemd_postun airtime-playout.service
 %systemd_postun airtime-liquidsoap.service
 
-
 %files pypo
 %attr(550, -, -) %{_unitdir}/airtime-playout.service
 %attr(550, -, -) %{_unitdir}/airtime-liquidsoap.service
@@ -315,11 +328,14 @@ exit 0
 %{_bindir}/airtime-playout
 %{_bindir}/pyponotify
 
-
-
+# Icecast Configuration Subpackage
 %package icecast
-Summary: radio rabe airtime icecast xsl installation
+Summary: LibreTime icecast XST configuration
+
 AutoReqProv: no
+
+Provides: %{legacy_name}-celery
+
 Requires: icecast
 
 %description icecast
@@ -328,7 +344,7 @@ Install LibreTime icecast XML snippet into icecast webdir.
 %files icecast
 %{_datarootdir}/icecast/web/airtime-icecast-status.xsl
 
-
+# Celery Subpackage
 %package celery
 Summary: LibreTime Celery Tasks
 
