@@ -52,6 +52,8 @@ install:
 - >
     if [[ "$PYTHON" == false ]]; then
       composer install --ignore-platform-reqs
+      # remove phpdocumentor since it is not 5.4 safe... (too hardcore? should try downgrading?)
+      rm -rf vendor/phpdocumentor
     fi
 - >
     if [[ "$PYTHON" == true ]]; then
