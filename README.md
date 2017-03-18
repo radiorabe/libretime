@@ -13,13 +13,16 @@ we will look what we can do.
 
 This README.md is on the orphan branch `rabe` in this fork. Any changes to the branch will never get merged to upstream.
 
-If you want to clone the master branch you can to the following:
+This fork does not have a `master` branch you want to clone upstream and then add this as remote:
 
 ```bash
-git clone -b master --depth=100  git@github.com:radiorabe/libretime.git
+git clone -b master -o upstream --depth=1  git@github.com:LibreTime/libretime.git
+cd libretime
+git remote add origin git@github.com:radiorabe/libretime.git
+git fetch origin
 ```
 
-This also creates a shallow clone only containing the last 100 refs, this way the initial clone is much faster. If you ever want the complete history locally, you need to unshallow your working copy:
+This also creates a shallow clone only containing the last 100 refs, that way the initial clone is much faster. If you ever want the complete history locally, you need to unshallow your working copy:
 
 ```bash
 git fetch --unshallow
