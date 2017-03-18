@@ -23,7 +23,7 @@
 #
 
 %define _version     3.0.0-alpha
-%define _rpm_version 3.0.0.alpha
+%define _rpm_version %(echo "%{_version}" | sed 's/-/./')
 %define legacy_name  airtime
 
 Name:           libretime
