@@ -170,7 +170,6 @@ Requires: php-pgsql
 Requires: php-bcmath
 Requires: php-mbstring
 Requires: php-fpm
-Requires: php-ZendFramework-full
 Requires: httpd
 Requires: liquidsoap
 
