@@ -51,7 +51,7 @@ addons:
 install:
 - >
     if [[ "$PYTHON" == false ]]; then
-      composer install
+      composer install --ignore-platform-reqs
     fi
 - >
     if [[ "$PYTHON" == true ]]; then
