@@ -351,6 +351,7 @@ Summary: LibreTime Celery Tasks
 AutoReqProv: no
 
 Requires: python-celery
+%{?systemd_requires}
 
 %description celery
 LibreTime Celery Tasks.
