@@ -67,6 +67,7 @@ tar -czf $target_file \
         --exclude-vcs \
         --exclude .zfproject.xml \
         --exclude .gitignore \
+        --exclude libretime.spec \
         --exclude .travis.yml \
         --exclude travis \
         --exclude mkdocs.yml \
