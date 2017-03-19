@@ -97,3 +97,9 @@ deploy:
   on:
     tags: true
     condition: $PYTHON = true
+- provider: script
+  skip_cleanup: true
+  script: travis/trigger-obs.sh
+  on:
+    tags: true
+    condition: $PYTHON = true
