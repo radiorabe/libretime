@@ -99,6 +99,7 @@ yum install -y \
   gcc \
   python-devel \
   python-lxml \
+  libffi-devel \
   openssl-devel
 
 
