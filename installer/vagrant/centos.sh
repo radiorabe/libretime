@@ -103,6 +103,12 @@ yum install -y \
   python-lxml \
   openssl-devel
 
+# for running selenium tests
+yum install -y \
+  java \
+  xorg-x11-server-Xvfb \
+  wget \
+  firefox
 
 
 # SELinux Setup

@@ -72,3 +72,19 @@ In most cases you need to install deps before the tests can be run.
 cd python_apps/airtime_analyzer
 nosetests
 ```
+
+## User Interface
+
+The user interface gets tested using selenium. You need to install the following dependencies for the selenium tests to execute.
+
+* firefox
+* xvfb
+* java
+* wget
+
+After ensuring everything is installed you can execute the tests againt the local development instance.
+
+```bash
+cd tests
+bash run_selenium.sh http://localhost:8080
+```

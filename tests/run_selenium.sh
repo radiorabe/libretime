@@ -1,7 +1,10 @@
 #!/bin/bash
 
-SELENIUM_BIN=selenium-server-standalone-2.42.2.jar
+SELENIUM_BIN=selenium-server-standalone-3.3.1.jar
+SELENIUM_BIN=selenium-html-runner-3.0.1.jar
 SELENIUM_URL=http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
+SELENIUM_URL=http://selenium-release.storage.googleapis.com/3.3/selenium-server-standalone-3.3.1.jar
+SELENIUM_URL=http://selenium-release.storage.googleapis.com/3.0/selenium-html-runner-3.0.1.jar
 
 printUsage()
 {
@@ -40,8 +43,14 @@ fi
 
 # Livechat is very slow to load sometimes, which can make the tests fail. Here we tell Selenium to replace "livechatinc" in any HTML with
 # some non-existent domain.
-REMOVE_LIVECHAT_PARAMS="-userContentTransformation livechatinc foobar1234567testtest"
+REMOVE_LIVECHAT_PARAMS="-proxyInjectionMode -userContentTransformation livechatinc foobar1234567testtest"
+REMOVE_LIVECHAT_PARAMS=""
+
+PATH="/usr/lib64/firefox/:$PATH"
 
 # You must pass the full path to the HTML suite and the results file to Selenium:
-xvfb-run java -jar ${SELENIUM_BIN} -proxyInjectionMode ${REMOVE_LIVECHAT_PARAMS} -htmlSuite "*firefox" "${AIRTIME_URL}" "${PWD}"/selenium/Airtime.html "${PWD}"/results.html
+#Xvfb :99 -ac -screen 0 1280x1024x24 &
+#export DISPLAY=:99
+echo xvfb-run java -jar ${SELENIUM_BIN} ${REMOVE_LIVECHAT_PARAMS} -htmlSuite "*firefox" "${AIRTIME_URL}" "${PWD}"/selenium/Airtime.html "${PWD}"/results/
+xvfb-run java -jar ${SELENIUM_BIN} ${REMOVE_LIVECHAT_PARAMS} -htmlSuite "*firefox" "${AIRTIME_URL}" "${PWD}"/selenium/Airtime.html "${PWD}"/results/
 
