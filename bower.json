@@ -16,7 +16,8 @@
     "jquery-migrate": "~1.0.0",
     "qtip2-main": "~3.0.3",
     "datatables": "~1.10.15",
-    "jquery-datatables-columnfilter": "~0.0.7"
+    "jquery-datatables-columnfilter": "~0.0.7",
+    "datatables-plugins": "~1.10.15"
   },
   "resolutions": {
     "datatables": "~1.10.15"
