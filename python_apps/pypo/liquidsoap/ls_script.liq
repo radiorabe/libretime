@@ -41,7 +41,7 @@ source_id = ref 0
 
 def check_version(~version=liquidsoap.version, major, minor) =
     v = list.map(int_of_string, string.split(separator="\.", version))
-    list.nth(v,0) > major or list.nth(v,0) == major and list.nth(v,1) >= minor
+    list.nth(v,0,default=0) > major or list.nth(v,0,default=0) == major and list.nth(v,1,default=0) >= minor
 end
 
 # cue cut fix for liquidsoap <1.2.2
@@ -241,7 +241,7 @@ def check_master_dj_client(user,password) =
     #get the output of the php script
     ret = get_process_lines("python #{auth_path} --master #{user} #{password}")
     #ret has now the value of the live client (dj1,dj2, or djx), or "ERROR"/"unknown" ...
-    ret = list.hd(ret)
+    ret = list.hd(ret, default="")
 
     #return true to let the client transmit data, or false to tell harbor to decline
     ret == "True"
@@ -252,7 +252,7 @@ def check_dj_client(user,password) =
     #get the output of the php script
     ret = get_process_lines("python #{auth_path} --dj #{user} #{password}")
     #ret has now the value of the live client (dj1,dj2, or djx), or "ERROR"/"unknown" ...
-    hd = list.hd(ret)
+    hd = list.hd(ret, default="")
     log("Live DJ authenticated: #{hd}")
     hd == "True"
 end
