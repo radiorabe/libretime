@@ -249,7 +249,7 @@ def check_auth(user="", password="", ~type="master") =
     if ret then
         log("#{type} user #{user} authenticated",label="#{type}_source")
     else
-        log("#{type} user #{user} auth failed",label="master_source",level=2)
+        log("#{type} user #{user} auth failed",label="#{type}_source",level=2)
     end
 
     ret
