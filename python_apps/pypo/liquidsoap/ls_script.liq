@@ -235,26 +235,40 @@ def master_dj_disconnect() =
     update_source_status("master_dj", false)
 end
 
-#auth function for live stream
-def check_master_dj_client(user,password) =
-    log("master connected")
-    #get the output of the php script
-    ret = get_process_lines("python #{auth_path} --master #{user} #{password}")
-    #ret has now the value of the live client (dj1,dj2, or djx), or "ERROR"/"unknown" ...
-    ret = list.hd(ret, default="")
+# Auth function for live stream
+# @Category LiveStream
+# @param user     Username to check against LibreTime API
+# @param password Password to check against LibreTime API
+# @param ~type    Type of password to check, "dj" or "master, default: "master"
+def check_auth(user="", password="", ~type="master") =
+    log("#{type} user #{user} connected",label="#{type}_source")
 
-    #return true to let the client transmit data, or false to tell harbor to decline
-    ret == "True"
+    # Check auth based on return value from auth script
+    ret = snd(snd(run_process("python #{auth_path} --#{type} #{user} #{password}"))) == "0"
+
+    if ret then
+        log("#{type} user #{user} authenticated",label="#{type}_source")
+    else
+        log("#{type} user #{user} auth failed",label="master_source",level=2)
+    end
+
+    ret
 end
 
-def check_dj_client(user,password) =
-    log("live dj connected")
-    #get the output of the php script
-    ret = get_process_lines("python #{auth_path} --dj #{user} #{password}")
-    #ret has now the value of the live client (dj1,dj2, or djx), or "ERROR"/"unknown" ...
-    hd = list.hd(ret, default="")
-    log("Live DJ authenticated: #{hd}")
-    hd == "True"
+# Check master source auth
+# @Category LiveStream
+# @param user     Username to check against LibreTime API
+# @param password Password to check against LibreTime API
+def check_master_dj_client(user, password) =
+    check_auth(user, password)
+end
+
+# Check dj/show source auth
+# @Category LiveStream
+# @param user     Username to check against LibreTime API
+# @param password Password to check against LibreTime API
+def check_dj_client(user, password) =
+    check_auth(user, password, type="dj")
 end
 
 s = switch(id="schedule_noise_switch",
