@@ -292,16 +292,19 @@
     border: none;
 }
 
-.spl_sortable li .crossfade,.spl_sortable li .cue-edit {
+.spl_sortable li .crossfade {
     background: #debc9e url(images/crossfade_bg.png) repeat-x 0 0 !important;
     border: 1px solid #5d5d5d;
     border-width: 1px 0 0 0;
-    min-height: 35px;
+    min-height: 110px;
 }
 
 .spl_sortable li .cue-edit {
     background: #b6d1d5 url(images/cue-editor_bg.png) repeat-x 0 0
         !important;
+    border: 1px solid #5d5d5d;
+    border-width: 1px 0 0 0;
+    min-height: 120px;
 }
 
 .spl_sortable dl.inline-list {
