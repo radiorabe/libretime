@@ -7,7 +7,7 @@ function setSmartBlockEvents() {
         form = activeTab.find('.smart-block-form');
 
     /********** ADD CRITERIA ROW **********/
-    form.find('#criteria_add').live('click', function(){
+    form.find('#criteria_add').on('click', function(){
         
         var div = $('dd[id="sp_criteria-element"]').children('div:visible:last');
 
@@ -38,7 +38,7 @@ function setSmartBlockEvents() {
     });
     
     /********** ADD MODIFIER ROW **********/
-    form.find('a[id^="modifier_add"]').live('click', function(){
+    form.find('a[id^="modifier_add"]').on('click', function(){
         var criteria_value = $(this).siblings('select[name^="sp_criteria_field"]').val();
 
 
@@ -79,7 +79,7 @@ function setSmartBlockEvents() {
     });
 	
     /********** REMOVE ROW **********/
-    form.find('a[id^="criteria_remove"]').live('click', function(){
+    form.find('a[id^="criteria_remove"]').on('click', function(){
         var curr = $(this).parent();
         var curr_pos = curr.index();
         var list = curr.parent();
@@ -204,17 +204,17 @@ function setSmartBlockEvents() {
     // moved to spl.js
 
     /********** GENERATE ACTION **********/
-    activeTab.find('button[id="generate_button"]').live("click", function(){
+    activeTab.find('button[id="generate_button"]').on("click", function(){
         buttonClickAction('generate', 'playlist/smart-block-generate');
     });
     
     /********** SHUFFLE ACTION **********/
-    activeTab.find('button[id="shuffle_button"]').live("click", function(){
+    activeTab.find('button[id="shuffle_button"]').on("click", function(){
         buttonClickAction('shuffle', 'playlist/smart-block-shuffle');
     });
 	
     /********** CHANGE PLAYLIST TYPE **********/
-    form.find('dd[id="sp_type-element"]').live("change", function(){
+    form.find('dd[id="sp_type-element"]').on("change", function(){
         //buttonClickAction('generate', 'playlist/empty-content');
         $(".active-tab").find('button[id="save_button"]').click();
         setupUI();
@@ -222,7 +222,7 @@ function setSmartBlockEvents() {
     });
     
     /********** CRITERIA CHANGE **********/
-    form.find('select[id^="sp_criteria"]:not([id^="sp_criteria_modifier"])').live("change", function(){
+    form.find('select[id^="sp_criteria"]:not([id^="sp_criteria_modifier"])').on("change", function(){
         var index = getRowIndex($(this).parent());
         //need to change the criteria value for any modifier rows
         var critVal = $(this).val();
@@ -245,7 +245,7 @@ function setSmartBlockEvents() {
     });
     
     /********** MODIFIER CHANGE **********/
-    form.find('select[id^="sp_criteria_modifier"]').live("change", function(){
+    form.find('select[id^="sp_criteria_modifier"]').on("change", function(){
         var criteria_value = $(this).next(),
             index_num = getRowIndex($(this).parent());
         

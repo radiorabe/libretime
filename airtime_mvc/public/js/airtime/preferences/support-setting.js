@@ -31,7 +31,7 @@ $(document).ready(function() {
         promote.removeAttr("disabled");
     }
     
-    promote.live('click', function(){
+    promote.on('click', function(){
         if($(this).is(':checked')){
             $("#public-info").show();
         }else{

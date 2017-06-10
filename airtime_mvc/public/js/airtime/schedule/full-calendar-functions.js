@@ -285,7 +285,7 @@ function eventRender(event, element, view) {
 
 function eventAfterRender( event, element, view ) {
 
-    $(element).find(".small-icon").live('mouseover',function(){
+    $(element).find(".small-icon").on('mouseover',function(){
         addQtipsToIcons($(this), event.id);
     });
 }

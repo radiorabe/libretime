@@ -26,12 +26,11 @@ class EmbedController extends Zend_Controller_Action
         $request = $this->getRequest();
 
         $this->view->mrp_js = Application_Common_HTTPHelper::getStationUrl() . "js/airtime/player/mrp.js?".$CC_CONFIG['airtime_version'];
-        // todo: replace with main jquery from bower once libretime uses a modern version
-        $this->view->jquery = Application_Common_HTTPHelper::getStationUrl() . "js/libs/jquery-1.10.2.js";
+        $this->view->jquery = Application_Common_HTTPHelper::getStationUrl() . "lib/jquery/jquery.min.js";
         $this->view->muses_swf = Application_Common_HTTPHelper::getStationUrl() . "js/airtime/player/muses.swf";
         $this->view->metadata_api_url = Application_Common_HTTPHelper::getStationUrl() . "api/live-info";
         $this->view->player_title = json_encode($this->view->escape($request->getParam('title')));
-        $this->view->jquery_i18n = Application_Common_HTTPHelper::getStationUrl() . "js/i18n/jquery.i18n.js?";
+        $this->view->jquery_i18n = Application_Common_HTTPHelper::getStationUrl() . "lib/jquery-i18n/jquery.i18n.min.js?";
 
         $styleParam = $request->getParam('style');
         $player_style = isset($styleParam) ? $styleParam : "basic";
@@ -78,7 +77,7 @@ class EmbedController extends Zend_Controller_Action
         $CC_CONFIG = Config::getConfig();
 
         $this->view->css = Application_Common_HTTPHelper::getStationUrl() . "widgets/css/airtime-widgets.css?".$CC_CONFIG['airtime_version'];
-        $this->view->jquery = Application_Common_HTTPHelper::getStationUrl() . "widgets/js/jquery-1.6.1.min.js?".$CC_CONFIG['airtime_version'];
+        $this->view->jquery = Application_Common_HTTPHelper::getStationUrl() . "lib/jquery/jquery.min.js?".$CC_CONFIG['airtime_version'];
         $this->view->jquery_custom = Application_Common_HTTPHelper::getStationUrl() . "widgets/js/jquery-ui-1.8.10.custom.min.js?".$CC_CONFIG['airtime_version'];
         $this->view->widget_js = Application_Common_HTTPHelper::getStationUrl() . "widgets/js/jquery.showinfo.js?".$CC_CONFIG['airtime_version'];
     }
@@ -91,7 +90,7 @@ class EmbedController extends Zend_Controller_Action
 
         $request = $this->getRequest();
 
-        $this->view->angular = Application_Common_HTTPHelper::getStationUrl() . 'js/libs/angular.min.js?'.$CC_CONFIG['airtime_version'];
+        $this->view->angular = Application_Common_HTTPHelper::getStationUrl() . 'lib/angular/angular.min.js?'.$CC_CONFIG['airtime_version'];
         $widgetStyle = $request->getParam('style');
         if ($widgetStyle == "premium") {
             $this->view->widgetStyle = "premium";
@@ -100,7 +99,7 @@ class EmbedController extends Zend_Controller_Action
             $this->view->widgetStyle = "basic";
             $this->view->css = Application_Common_HTTPHelper::getStationUrl() . "/css/embed/weekly-schedule-widget-basic.css?" . $CC_CONFIG['airtime_version'];
         }
-        $this->view->jquery = Application_Common_HTTPHelper::getStationUrl() . "widgets/js/jquery-1.6.1.min.js?".$CC_CONFIG['airtime_version'];
+        $this->view->jquery = Application_Common_HTTPHelper::getStationUrl() . "lib/jquery/jquery.min.js?".$CC_CONFIG['airtime_version'];
 
         $weeklyScheduleData = WidgetHelper::getWeekInfoV2();
 

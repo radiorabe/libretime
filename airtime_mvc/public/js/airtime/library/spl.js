@@ -1533,9 +1533,9 @@ var AIRTIME = (function(AIRTIME){
     mod.onReady = function() {
         $lib = $("#library_content");
 
-        $('#new-playlist').live('click', function(){AIRTIME.playlist.fnNew();});
-        $('#new-smart-block').live('click', function(){AIRTIME.playlist.fnNewBlock();});
-        $('#new-webstream').live('click', function(){AIRTIME.playlist.fnWsNew();});
+        $('#new-playlist').on('click', function(){AIRTIME.playlist.fnNew();});
+        $('#new-smart-block').on('click', function(){AIRTIME.playlist.fnNewBlock();});
+        $('#new-webstream').on('click', function(){AIRTIME.playlist.fnWsNew();});
 
         AIRTIME.playlist.init();
     };

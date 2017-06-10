@@ -469,7 +469,7 @@ $(document).ready(function() {
     getAdminPasswordStatus();
     var s = $("[name^='customStreamSettings']:checked");
 
-    $("[id^='stream_save'], [name^='customStreamSettings']").live('click', function() {
+    $("[id^='stream_save'], [name^='customStreamSettings']").on('click', function() {
         var e = $(this);
         if (e[0] == s[0]) { return; }
         var confirm_pypo_restart_text = $.i18n._("WARNING: This will restart your stream and may cause a short dropout for your listeners!");

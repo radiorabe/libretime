@@ -131,7 +131,7 @@ function deleteAllFiles() {
 
 $(document).ready(function() {
 
-    $('.collapsible-header').live('click',function() {
+    $('.collapsible-header').on('click',function() {
         $(this).next().toggle('fast');
         $(this).toggleClass("closed");
         return false;
@@ -142,7 +142,7 @@ $(document).ready(function() {
     }
 
     /* No longer using AJAX for this form. Zend + our code makes it needlessly hard to deal with. -- Albert
-    $('#pref_save').live('click', function() {
+    $('#pref_save').on('click', function() {
         var data = $('#pref_form').serialize();
         var url = baseUrl+'Preference/index';
         

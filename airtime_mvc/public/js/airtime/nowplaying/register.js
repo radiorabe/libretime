@@ -61,13 +61,13 @@ $(document).ready(function(){
     dialog.dialog('open');
     
 
-    $('.collapsible-header').live('click',function() {
+    $('.collapsible-header').on('click',function() {
         $(this).next().toggle('fast');
         $(this).toggleClass("close");
         return false;
     }).next().hide();
     
-    $("#SupportFeedback").live('click', function(){
+    $("#SupportFeedback").on('click', function(){
         var pub = $("#Publicise");
         var privacy = $("#Privacy");
         var button = $("#help_airtime");
@@ -85,7 +85,7 @@ $(document).ready(function(){
     });
 
     var promote = $("#Publicise");
-    promote.live('click', function(){
+    promote.on('click', function(){
         if($(this).is(':checked')){
             $("#public-info").show();
         }else{
@@ -96,7 +96,7 @@ $(document).ready(function(){
         $("#public-info").show();
     }
     
-    $("#Privacy").live('click', function(){
+    $("#Privacy").on('click', function(){
         var support = $("#SupportFeedback");
         var button = $("#help_airtime");
         if($(this).is(':checked') && support.is(':checked')){
@@ -112,12 +112,12 @@ $(document).ready(function(){
         button.attr('disabled', 'disabled' ).addClass('ui-state-disabled');
     }
     
-    $('.toggle legend').live('click',function() {
+    $('.toggle legend').on('click',function() {
         $('.toggle').toggleClass('closed');
         return false;
     });
     
-    $("#Logo").live('change', function(ev){
+    $("#Logo").on('change', function(ev){
         var content, res, logoEl;
         
         content = $(this).val();
