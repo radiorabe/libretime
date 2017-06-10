@@ -52,6 +52,10 @@ echo -n "Running composer install..."
 composer install --quiet --no-dev --ignore-platform-reqs
 echo " Done"
 
+echo -n "Runing bower install..."
+bower install
+echo " Done"
+
 popd
 
 #echo "Minimizing LibreTime Javascript files..."

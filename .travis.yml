@@ -59,6 +59,8 @@ install:
       pushd python_apps/airtime_analyzer 
       python setup.py install --dry-run --no-init-script
       popd
+      # install bower so we can use it in release.sh
+      npm install -g bower
     fi
 before_script:
 # prepare the database as per docs/testing.md
