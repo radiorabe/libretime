@@ -2,14 +2,6 @@ var previewWidth = 482,
     previewHeight = 110;
 
 $(document).ready(function() {
-
-    /* Removed as this is now (hopefully) unnecessary */
-    //$("#Panel").stickyPanel({
-    //    topPadding: 1,
-    //    afterDetachCSSClass: "floated-panel",
-    //    savePanelSpace: true
-    //});
-
     //this statement tells the browser to fade out any success message after 5 seconds
     setTimeout(function(){$(".success").fadeOut("slow", function(){$(this).empty()});}, 5000);
 });
