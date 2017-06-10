@@ -201,7 +201,7 @@ function initUserData() {
         },
     });
 
-    type.live("change", function(){
+    type.on("change", function(){
         //when the title changes on live tipsy tooltips the changes take
         //affect the next time tipsy is shown so we need to hide and re-show it
         $(this).tipsy('hide');
@@ -226,7 +226,7 @@ function initUserData() {
 
     var newUser = {login:"", first_name:"", last_name:"", type:"G", id:""};
 
-    $('#add_user_button').live('click', function(){
+    $('#add_user_button').on('click', function(){
         populateForm(newUser);
         $("#user_details").css("visibility", "visible");
     });
@@ -237,7 +237,7 @@ $(document).ready(function() {
     assignUserRightsToUserTypes();
     initUserData();
 
-    $('#save_user').live('click', function(){
+    $('#save_user').on('click', function(){
         var data = $('#user_form').serialize();
         var url = baseUrl+'User/add-user';
 

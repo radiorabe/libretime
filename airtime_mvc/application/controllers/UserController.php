@@ -28,8 +28,7 @@ class UserController extends Zend_Controller_Action
         $baseUrl = Application_Common_OsPath::getBaseDir();
 
         $js_files = array(
-            'js/datatables/js/jquery.dataTables.js?',
-            'js/datatables/plugin/dataTables.pluginAPI.js?',
+            'lib/datatables.net/js/jquery.dataTables.min.js?',
             'js/airtime/user/user.js?'
         );
 
