@@ -1,5 +1,6 @@
 #!/bin/bash -e
 composer install
+bower install
 
 git_build=""
 if [ -d .git ]; then
