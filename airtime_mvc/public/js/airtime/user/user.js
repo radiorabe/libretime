@@ -191,23 +191,28 @@ function assignUserRightsToUserTypes() {
 function initUserData() {
     var type = $('#type');
 
-    type.live("change", function(){
-        //when the title changes on live tipsy tooltips the changes take
-        //affect the next time tipsy is shown so we need to hide and re-show it
-        $(this).tipsy('hide').tipsy('show');
-    });
-
     type.tipsy({
         gravity: 'w',
         html: true,
         opacity: 0.9,
         trigger: 'manual',
-        live: true,
         title: function() {
             return $('#user-type-'+$(this).val()).attr('user-rights');
-        }
+        },
     });
 
+    type.live("change", function(){
+        //when the title changes on live tipsy tooltips the changes take
+        //affect the next time tipsy is shown so we need to hide and re-show it
+        $(this).tipsy('hide');
+        $(this).tipsy('show');
+    });
+    type.on("click", function() {
+        $(this).tipsy('show');
+    });
+    type.on('blur', function() {
+        $(this).tipsy('hide');
+    });
     var table = $("#users_datable");//.DataTable();
     $('.datatable tbody').on( 'click', 'tr', function () {
         $(this).parent().find('tr.selected').removeClass('selected');
@@ -218,7 +223,6 @@ function initUserData() {
         table.row('.selected').remove().draw( false );
     } );
 
-    type.tipsy('show');
 
     var newUser = {login:"", first_name:"", last_name:"", type:"G", id:""};
 

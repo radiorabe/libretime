@@ -23,7 +23,8 @@
     "fullcalendar": "~2.0",
     "jQuery-contextMenu": "~2.5.0",
     "fontawesome": "~4.7.0",
-    "qtip2": "https://github.com/qTip2/qTip2.git#da025efe0085304d2bc890b079befa020819af80"
+    "qtip2": "https://github.com/qTip2/qTip2.git#da025efe0085304d2bc890b079befa020819af80",
+    "tipsy": "v1.0.0a"
   },
   "ignore": [
     "**/.*",
