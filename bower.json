@@ -19,7 +19,8 @@
     "js-timezone-detect": "48d9d480aaa2a3793aefaac74997417ca66398df",
     "plupload": "~1.5.4",
     "moment": "~2.10.3",
-    "moment-timezone": "~0.4.0"
+    "moment-timezone": "~0.4.0",
+    "fullcalendar": "~2.0"
   },
   "ignore": [
     "**/.*",

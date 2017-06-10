@@ -4435,3 +4435,7 @@ table.fc-header  {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 }
+
+#schedule_calendar .fc-agenda .fc-agenda-axis {
+    white-space: nowrap;
+}

@@ -56,6 +56,7 @@ class ScheduleController extends Zend_Controller_Action
             "var calendarPref = {};\n".
             "calendarPref.weekStart = ".Application_Model_Preference::GetWeekStartDay().";\n".
             "calendarPref.timestamp = ".time().";\n".
+            "calendarPref.timezone = '". Application_Common_DateHelper::getUserTimezoneAbbreviation()."';\n".
             "calendarPref.timezoneOffset = ".Application_Common_DateHelper::getUserTimezoneOffset().";\n".
             "calendarPref.timeScale = '".Application_Model_Preference::GetCalendarTimeScale()."';\n".
             "calendarPref.timeInterval = ".Application_Model_Preference::GetCalendarTimeInterval().";\n".
@@ -71,8 +72,6 @@ class ScheduleController extends Zend_Controller_Action
         //set offset to ensure it loads last
         $this->view->headScript()->offsetSetFile(90, $baseUrl.'js/airtime/schedule/full-calendar-functions.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
-        // todo: fullcalendar has js changes that need analyzing before movin to lib
-        $this->view->headScript()->appendFile($baseUrl.'js/fullcalendar/fullcalendar.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'lib/timepicker/jquery.ui.timepicker.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'lib/colorpicker/js/colorpicker.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
@@ -81,7 +80,7 @@ class ScheduleController extends Zend_Controller_Action
         $this->view->headScript()->appendFile($baseUrl.'lib/jquery.blockUI/jquery.blockUI.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         $this->view->headLink()->appendStylesheet($baseUrl.'lib/timepicker/jquery.ui.timepicker.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/fullcalendar.css?'.$CC_CONFIG['airtime_version']);
+        $this->view->headLink()->appendStylesheet($baseUrl.'lib/fullcalendar/dist/fullcalendar.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'lib/colorpicker/css/colorpicker.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/add-show.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/jquery.contextMenu.css?'.$CC_CONFIG['airtime_version']);
@@ -92,6 +91,7 @@ class ScheduleController extends Zend_Controller_Action
 
         $this->view->headScript()->appendFile($baseUrl.'lib/moment/min/moment.min.js?'.$CC_CONFIG['airtime_version'], 'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'lib/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js?'.$CC_CONFIG['airtime_version'], 'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl.'lib/fullcalendar/dist/fullcalendar.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/utilities/utilities.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/buttons/buttons.js?'.$CC_CONFIG['airtime_version'],'text/javascript');

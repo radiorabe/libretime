@@ -308,10 +308,8 @@ function createFullCalendar(data){
         editable: false,
         allDaySlot: false,
         axisFormat: 'H:mm',
-        timeFormat: {
-            agenda: 'H:mm{ - H:mm}',
-            month: 'H:mm{ - H:mm}'
-        },
+        timeFormat: 'H:mm',
+        displayEventEnd: true,
         //i18n_months is in common.js
         monthNames: i18n_months,
         monthNamesShort: [
@@ -357,11 +355,12 @@ function createFullCalendar(data){
         lazyFetching: true,
         serverTimestamp: parseInt(data.calendarInit.timestamp, 10),
         serverTimezoneOffset: parseInt(data.calendarInit.timezoneOffset, 10),
+        timezone: data.calendarInit.timezone,
        
         events: getFullCalendarEvents,
 
         //callbacks (in full-calendar-functions.js)
-        viewDisplay: viewDisplay,
+        viewRender: viewDisplay,
         dayClick: dayClick,
         eventRender: eventRender,
         eventAfterRender: eventAfterRender,
