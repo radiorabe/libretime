@@ -48,18 +48,18 @@ class Application_Service_CalendarService
                 if (!isset($ccFile)) {
                      $menu["error when recording"] = array (
                          "name" => _("Record file doesn't exist"),
-                         "icon" => "error");
+                         "icon" => "fa-error");
                 }else {
                     $menu["view_recorded"] = array(
                         "name" => _("View Recorded File Metadata"),
-                        "icon" => "overview",
+                        "icon" => "fa-eye",
                         "url" => $baseUrl."library/edit-file-md/id/".$ccFile->getDbId());
                 }
             } else {
                 $menu["content"] = array(
                     // "name"=> _("Show Content"),
                     "name"=> _("View"),
-                    "icon" => "overview",
+                    "icon" => "fa-eye",
                     "url" => $baseUrl."schedule/show-content-dialog");
             }
         } else {
@@ -79,7 +79,7 @@ class Application_Service_CalendarService
                     $menu["schedule"] = array(
                         // "name"=> _("Add / Remove Content"),
                         "name" => _("Schedule Tracks"),
-                        "icon" => "add-remove-content",
+                        "icon" => "fa-list",
                         "url" => $baseUrl."showbuilder/builder-dialog/");
                 }
             }
@@ -91,7 +91,7 @@ class Application_Service_CalendarService
                 $menu["content"] = array(
                     // "name"=> _("Show Content"),
                     "name"=> _("View"),
-                    "icon" => "overview",
+                    "icon" => "fa-eye",
                     "url" => $baseUrl."schedule/show-content-dialog");
             }
 
@@ -104,7 +104,7 @@ class Application_Service_CalendarService
                    $menu["clear"] = array(
                        // "name"=> _("Remove All Content"),
                        "name"=> _("Clear Show"),
-                       "icon" => "remove-all-content",
+                       "icon" => "fa-eraser",
                        "url" => $baseUrl."schedule/clear-show");
                 }
             }
@@ -118,12 +118,12 @@ class Application_Service_CalendarService
                     $menu["cancel_recorded"] = array(
                         // "name"=> _("Cancel Current Show"),
                         "name"=> _("Cancel Show"),
-                        "icon" => "delete");
+                        "icon" => "fa-trash");
                 } else {
                     $menu["cancel"] = array(
                         // "name"=> _("Cancel Current Show"),
                         "name"=> _("Cancel Show"),
-                        "icon" => "delete");
+                        "icon" => "fa-trash");
                 }
             }
 
@@ -141,36 +141,36 @@ class Application_Service_CalendarService
 
                 if ($isRepeating) {
                     if ($populateInstance) {
-                        $menu["edit"] = array(
+                        $menu["fa-pencil"] = array(
                             // "name" => _("Edit This Instance"),
                             "name" => _("Edit Instance"),
-                            "icon" => "edit",
+                            "icon" => "fa-pencil",
                             "url" => $baseUrl . "Schedule/populate-repeating-show-instance-form"
                         );
                     } else {
-                        $menu["edit"] = array(
+                        $menu["fa-pencil"] = array(
                             "name" => _("Edit"),
-                            "icon" => "edit",
+                            "icon" => "fa-pencil",
                             "items" => array()
                         );
 
-                        $menu["edit"]["items"]["all"] = array(
+                        $menu["fa-pencil"]["items"]["all"] = array(
                             "name" => _("Edit Show"),
-                            "icon" => "edit",
+                            "icon" => "fa-pencil",
                             "url" => $baseUrl . "Schedule/populate-show-form"
                         );
 
-                        $menu["edit"]["items"]["instance"] = array(
+                        $menu["fa-pencil"]["items"]["instance"] = array(
                             // "name" => _("Edit This Instance"),
                             "name" => _("Edit Instance"),
-                            "icon" => "edit",
+                            "icon" => "fa-pencil",
                             "url" => $baseUrl . "Schedule/populate-repeating-show-instance-form"
                         );
                     }
                 } else {
                     $menu["edit"] = array(
                         "name"=> _("Edit Show"),
-                        "icon" => "edit",
+                        "icon" => "fa-pencil",
                         "_type"=>"all",
                         "url" => $baseUrl."Schedule/populate-show-form");
                 }
@@ -186,29 +186,29 @@ class Application_Service_CalendarService
                 if ($isRepeating) {
                     $menu["del"] = array(
                         "name"=> _("Delete"),
-                        "icon" => "delete",
+                        "icon" => "fa-trash",
                         "items" => array());
 
                     $menu["del"]["items"]["single"] = array(
                         // "name"=> _("Delete This Instance"),
                         "name"=> _("Delete Instance"),
-                        "icon" => "delete",
+                        "icon" => "fa-trash",
                         "url" => $baseUrl."schedule/delete-show-instance");
 
                     $menu["del"]["items"]["following"] = array(
                         // "name"=> _("Delete This Instance and All Following"),
                         "name"=> _("Delete Instance and All Following"),
-                        "icon" => "delete",
+                        "icon" => "fa-trash",
                         "url" => $baseUrl."schedule/delete-show");
                 } elseif ($populateInstance) {
                     $menu["del"] = array(
                         "name"=> _("Delete"),
-                        "icon" => "delete",
+                        "icon" => "fa-trash",
                         "url" => $baseUrl."schedule/delete-show-instance");
                 } else {
                     $menu["del"] = array(
                         "name"=> _("Delete"),
-                        "icon" => "delete",
+                        "icon" => "fa-trash",
                         "url" => $baseUrl."schedule/delete-show");
                 }
             }

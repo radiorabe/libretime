@@ -64,7 +64,8 @@ class ScheduleController extends Zend_Controller_Action
             "var calendarEvents = $events;"
         );
 
-        $this->view->headScript()->appendFile($baseUrl.'js/contextmenu/jquery.contextMenu.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
+        $this->view->headLink()->appendStylesheet($baseUrl . 'lib/fontawesome/css/font-awesome.min.css?' . $CC_CONFIG['airtime_version']);
+        $this->view->headScript()->appendFile($baseUrl.'lib/jQuery-contextMenu/dist/jquery.contextMenu.min.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         //full-calendar-functions.js requires this variable, so that datePicker widget can be offset to server time instead of client time
         //this should be as a default, however with our new drop down timezone changing for shows, we should reset this offset then??
@@ -83,7 +84,7 @@ class ScheduleController extends Zend_Controller_Action
         $this->view->headLink()->appendStylesheet($baseUrl.'lib/fullcalendar/dist/fullcalendar.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'lib/colorpicker/css/colorpicker.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/add-show.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/jquery.contextMenu.css?'.$CC_CONFIG['airtime_version']);
+        $this->view->headLink()->appendStylesheet($baseUrl.'lib/jQuery-contextMenu/dist/jquery.contextMenu.css?'.$CC_CONFIG['airtime_version']);
 
         //Start Show builder JS/CSS requirements
         $headScript = $this->view->headScript();
@@ -100,7 +101,7 @@ class ScheduleController extends Zend_Controller_Action
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/showbuilder/builder.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         $this->view->headLink()->appendStylesheet($baseUrl.'css/media_library.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/jquery.contextMenu.css?'.$CC_CONFIG['airtime_version']);
+        $this->view->headLink()->appendStylesheet($baseUrl.'lib/jQuery-contextMenu/dist/jquery.contextMenu.min.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/datatables/css/ColVis.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/datatables/css/dataTables.colReorder.min.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/showbuilder.css?'.$CC_CONFIG['airtime_version']);

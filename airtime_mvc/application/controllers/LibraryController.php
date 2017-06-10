@@ -89,7 +89,7 @@ class LibraryController extends Zend_Controller_Action
         $user = new Application_Model_User($userInfo->id);
 
         //Open a jPlayer window and play the audio clip.
-        $menu["play"] = array("name"=> _("Preview"), "icon" => "play", "disabled" => false);
+        $menu["play"] = array("name"=> _("Preview"), "icon" => "fa-play", "disabled" => false);
 
         $isAdminOrPM = $user->isUserType(array(UTYPE_SUPERADMIN, UTYPE_ADMIN, UTYPE_PROGRAM_MANAGER));
 
@@ -109,16 +109,16 @@ class LibraryController extends Zend_Controller_Action
                 }
                 if ($isAdminOrPM || $obj->getCreatorId() == $user->getId()) {
                     if ($obj_sess->type === "playlist") {
-                        $menu["pl_add"] = array("name"=> _("Add to Playlist"), "icon" => "add-playlist", "icon" => "copy");
+                        $menu["pl_add"] = array("name"=> _("Add to Playlist"), "icon" => "fa-plus", "icon" => "copy");
                     } elseif ($obj_sess->type === "block" && $obj->isStatic()) {
-                        $menu["pl_add"] = array("name"=> _("Add to Smart Block"), "icon" => "add-playlist", "icon" => "copy");
+                        $menu["pl_add"] = array("name"=> _("Add to Smart Block"), "icon" => "fa-plus", "icon" => "copy");
                     }
                 }
             }
             if ($isAdminOrPM || $file->getFileOwnerId() == $user->getId()) {
-                $menu["del"] = array("name"=> _("Delete"), "icon" => "delete", "url" => $baseUrl."library/delete");
-                $menu["edit"] = array("name"=> _("Edit..."), "icon" => "edit", "url" => $baseUrl."library/edit-file-md/id/{$id}");
-                $menu["publish"] = array("name"=> _("Publish..."), "icon" => "soundcloud", "url" => $baseUrl."library/publish/id/{$id}");
+                $menu["del"] = array("name"=> _("Delete"), "icon" => "fa-trash", "url" => $baseUrl."library/delete");
+                $menu["edit"] = array("name"=> _("Edit..."), "icon" => "fa-pencil", "url" => $baseUrl."library/edit-file-md/id/{$id}");
+                $menu["publish"] = array("name"=> _("Publish..."), "icon" => "fa-soundcloud", "url" => $baseUrl."library/publish/id/{$id}");
             }
 
             // It's important that we always return the parent id (cc_files id)
@@ -126,7 +126,7 @@ class LibraryController extends Zend_Controller_Action
             // Our application logic (StoredFile.php) will determine if the track
             // is a cloud_file and handle it appropriately.
             $url = $baseUrl."api/get-media/file/$id/download/true";
-            $menu["download"] = array("name" => _("Download"), "icon" => "download", "url" => $url);
+            $menu["download"] = array("name" => _("Download"), "icon" => "fa-download", "url" => $url);
 
             // SOUNDCLOUD MENU OPTION
             $ownerId = empty($obj) ? $file->getFileOwnerId() : $obj->getCreatorId();
@@ -143,16 +143,16 @@ class LibraryController extends Zend_Controller_Action
                         $menu["sep1"] = "-----------";
 
                         //create a sub menu for Soundcloud actions.
-                        $menu["soundcloud"] = array("name" => _(SOUNDCLOUD), "icon" => "soundcloud", "items" => array());
-                        $menu["soundcloud"]["items"]["view"] = array("name" => _("View track"), "icon" => "soundcloud", "url" => $baseUrl . "soundcloud/view-on-sound-cloud/id/{$id}");
-                        $menu["soundcloud"]["items"]["update"] = array("name" => _("Update track"), "icon" => "soundcloud", "url" => $baseUrl . "soundcloud/update/id/{$trackRef->getDbForeignId()}");
+                        $menu["soundcloud"] = array("name" => _(SOUNDCLOUD), "icon" => "fa-soundcloud", "items" => array());
+                        $menu["soundcloud"]["items"]["view"] = array("name" => _("View track"), "icon" => "fa-soundcloud", "url" => $baseUrl . "soundcloud/view-on-sound-cloud/id/{$id}");
+                        $menu["soundcloud"]["items"]["update"] = array("name" => _("Update track"), "icon" => "fa-soundcloud", "url" => $baseUrl . "soundcloud/update/id/{$trackRef->getDbForeignId()}");
                     }
                 }
             }
         } elseif ($type === "playlist" || $type === "block") {
             if ($type === 'playlist') {
                 $obj = new Application_Model_Playlist($id);
-                $menu["duplicate"] = array("name" => _("Duplicate Playlist"), "icon" => "edit", "url" => $baseUrl."library/duplicate");
+                $menu["duplicate"] = array("name" => _("Duplicate Playlist"), "icon" => "fa-pencil", "url" => $baseUrl."library/duplicate");
             } elseif ($type === 'block') {
                 $obj = new Application_Model_Block($id);
                 if (!$obj->isStatic()) {
@@ -160,19 +160,19 @@ class LibraryController extends Zend_Controller_Action
                 }
                 if (($isAdminOrPM || $obj->getCreatorId() == $user->getId()) && $screen == "playlist") {
                     if ($obj_sess->type === "playlist") {
-                        $menu["pl_add"] = array("name"=> _("Add to Playlist"), "icon" => "add-playlist", "icon" => "copy");
+                        $menu["pl_add"] = array("name"=> _("Add to Playlist"), "icon" => "fa-plus");
                     }
                 }
             }
 
             if ($obj_sess->id !== $id && $screen == "playlist") {
                 if ($isAdminOrPM || $obj->getCreatorId() == $user->getId()) {
-                    $menu["edit"] = array("name"=> _("Edit..."), "icon" => "edit");
+                    $menu["edit"] = array("name"=> _("Edit..."), "icon" => "fa-pencil");
                 }
             }
 
             if ($isAdminOrPM || $obj->getCreatorId() == $user->getId()) {
-                $menu["del"] = array("name"=> _("Delete"), "icon" => "delete", "url" => $baseUrl."library/delete");
+                $menu["del"] = array("name"=> _("Delete"), "icon" => "fa-trash", "url" => $baseUrl."library/delete");
             }
         } elseif ($type == "stream") {
             $webstream = CcWebstreamQuery::create()->findPK($id);
@@ -183,15 +183,15 @@ class LibraryController extends Zend_Controller_Action
             if (isset($obj_sess->id) && $screen == "playlist") {
                 if ($isAdminOrPM || $obj->getCreatorId() == $user->getId()) {
                     if ($obj_sess->type === "playlist") {
-                        $menu["pl_add"] = array("name"=> _("Add to Playlist"), "icon" => "add-playlist", "icon" => "copy");
+                        $menu["pl_add"] = array("name"=> _("Add to Playlist"), "icon" => "fa-plus");
                     }
                 }
             }
             if ($isAdminOrPM || $obj->getCreatorId() == $user->getId()) {
                 if ($screen == "playlist") {
-                    $menu["edit"] = array("name"=> _("Edit..."), "icon" => "edit", "url" => $baseUrl."library/edit-file-md/id/{$id}");
+                    $menu["edit"] = array("name"=> _("Edit..."), "icon" => "fa-pencil", "url" => $baseUrl."library/edit-file-md/id/{$id}");
                 }
-                $menu["del"] = array("name"=> _("Delete"), "icon" => "delete", "url" => $baseUrl."library/delete");
+                $menu["del"] = array("name"=> _("Delete"), "icon" => "fa-trash", "url" => $baseUrl."library/delete");
             }
         }
 

@@ -20,7 +20,9 @@
     "plupload": "~1.5.4",
     "moment": "~2.10.3",
     "moment-timezone": "~0.4.0",
-    "fullcalendar": "~2.0"
+    "fullcalendar": "~2.0",
+    "jQuery-contextMenu": "~2.5.0",
+    "fontawesome": "~4.7.0"
   },
   "ignore": [
     "**/.*",

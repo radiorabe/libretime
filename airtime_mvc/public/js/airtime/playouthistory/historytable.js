@@ -846,7 +846,7 @@ var AIRTIME = (function(AIRTIME) {
                     
                     items["edit"] = {
                     	"name": $.i18n._("Edit"),
-                    	"icon": "edit",
+                    	"icon": "fa-pencil",
                     	"callback": callback
                     };
                 }
@@ -865,7 +865,7 @@ var AIRTIME = (function(AIRTIME) {
                     
                     items["del"] = {
                     	"name": $.i18n._("Delete"),
-                    	"icon": "delete",
+                    	"fa-trash": "delete",
                     	"callback": callback
                     };
                 }

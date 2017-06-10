@@ -28,15 +28,16 @@ class ShowbuilderController extends Zend_Controller_Action
         $this->view->headScript()->appendScript(Application_Common_GoogleAnalytics::generateGoogleTagManagerDataLayerJavaScript());
 
         $this->view->headLink()->appendStylesheet($baseUrl . 'css/redmond/jquery-ui-1.8.8.custom.css?' . $CC_CONFIG['airtime_version']);
+        $this->view->headLink()->appendStylesheet($baseUrl . 'lib/fontawesome/css/font-awesome.min.css?' . $CC_CONFIG['airtime_version']);
 
-        $this->view->headScript()->appendFile($baseUrl.'js/contextmenu/jquery.contextMenu.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl.'lib/jQuery-contextMenu/dist/jquery.contextMenu.min.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         $this->view->headScript()->appendFile($baseUrl.'lib/jquery.blockUI/jquery.blockUI.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/buttons/buttons.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/utilities/utilities.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
 
         $this->view->headLink()->appendStylesheet($baseUrl.'css/media_library.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/jquery.contextMenu.css?'.$CC_CONFIG['airtime_version']);
+        $this->view->headLink()->appendStylesheet($baseUrl.'lib/jQuery-contextMenu/dist/jquery.contextMenu.min.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/datatables/css/ColVis.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/datatables/css/dataTables.colReorder.min.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headScript()->appendFile($baseUrl.'js/airtime/library/library.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
@@ -132,15 +133,15 @@ class ShowbuilderController extends Zend_Controller_Action
         $item = CcScheduleQuery::create()->findPK($id);
         $instance = $item->getCcShowInstances();
 
-        $menu["preview"] = array("name"=> _("Preview"), "icon" => "play");
+        $menu["preview"] = array("name"=> _("Preview"), "icon" => "fa-play");
         //select the cursor
-        $menu["selCurs"] = array("name"=> _("Select cursor"),"icon" => "select-cursor");
-        $menu["delCurs"] = array("name"=> _("Remove cursor"),"icon" => "select-cursor");
+        $menu["selCurs"] = array("name"=> _("Select cursor"),"icon" => "fa-select-cursor");
+        $menu["delCurs"] = array("name"=> _("Remove cursor"),"icon" => "fa-select-cursor");
 
         if ($now < floatval($item->getDbEnds("U.u")) && $user->canSchedule($instance->getDbShowId())) {
 
             //remove/truncate the item from the schedule
-            $menu["del"] = array("name"=> _("Delete"), "icon" => "delete", "url" => $baseUrl."showbuilder/schedule-remove");
+            $menu["del"] = array("name"=> _("Delete"), "icon" => "fa-trash", "url" => $baseUrl."showbuilder/schedule-remove");
         }
 
         $this->view->items = $menu;

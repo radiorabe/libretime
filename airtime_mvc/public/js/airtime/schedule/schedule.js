@@ -384,7 +384,6 @@ $(document).ready(function() {
     $.contextMenu({
         selector: 'div.fc-event',
         trigger: "left",
-        ignoreRightClick: true,
         className: 'calendar-context-menu',
         
         build: function($el, e) {
