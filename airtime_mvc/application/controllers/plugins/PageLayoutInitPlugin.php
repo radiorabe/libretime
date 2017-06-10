@@ -156,7 +156,7 @@ class PageLayoutInitPlugin extends Zend_Controller_Plugin_Abstract
             ->appendStylesheet($baseUrl . 'css/bootstrap.css?' . $CC_CONFIG['airtime_version'])
             ->appendStylesheet($baseUrl . 'css/redmond/jquery-ui-1.8.8.custom.css?' . $CC_CONFIG['airtime_version'])
             ->appendStylesheet($baseUrl . 'css/pro_dropdown_3.css?' . $CC_CONFIG['airtime_version'])
-            ->appendStylesheet($baseUrl . 'css/qtip/jquery.qtip.min.css?' . $CC_CONFIG['airtime_version'])
+            ->appendStylesheet($baseUrl . 'lib/qtip2/dist/jquery.qtip.min.css?' . $CC_CONFIG['airtime_version'])
             ->appendStylesheet($baseUrl . 'css/styles.css?' . $CC_CONFIG['airtime_version'])
             ->appendStylesheet($baseUrl . 'css/masterpanel.css?' . $CC_CONFIG['airtime_version'])
             ->appendStylesheet($baseUrl . 'css/tipsy/jquery.tipsy.css?' . $CC_CONFIG['airtime_version']);
@@ -180,8 +180,7 @@ class PageLayoutInitPlugin extends Zend_Controller_Plugin_Abstract
             // todo: upgrade to bootstrap 3.x to get minified js in lib/
             ->appendFile($baseUrl . 'js/bootstrap/bootstrap.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'lib/underscore/underscore-min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            // todo: qtip is not available on bower in our version, it probably makes sense to upgrade to qtip2 3.x when moving
-            ->appendFile($baseUrl . 'js/qtip/jquery.qtip.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/qtip2/dist/jquery.qtip.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'lib/jPlayer/jquery.jplayer/jquery.jplayer.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'lib/sprintf/dist/sprintf.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'lib/jquery-cookie/jquery.cookie.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
