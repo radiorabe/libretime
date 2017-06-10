@@ -46,7 +46,7 @@ var AIRTIME = (function(AIRTIME) {
     
     var lengthMenu = [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, $.i18n._("All")]];
     
-    var sDom = 'l<"dt-process-rel"r><"H"T><"dataTables_scrolling"t><"F"ip>';
+    var sDom = 'l<"dt-process-rel"r>B<"H"T><"dataTables_scrolling"t><"F"ip>';
     
     var selectedLogItems = {};
     
@@ -251,9 +251,11 @@ var AIRTIME = (function(AIRTIME) {
     		show,
     		tmp;
     	
+        if (!!$showList.data("ui-accordion")) {
+            $showList.accordion( "destroy" );
+        }
     	$showList
-    		.accordion( "destroy" )
-    		.empty();
+            .empty();
     	
     	for (i = 0, len = oShows.length; i < len; i++) {
     		show = oShows[i];
@@ -316,7 +318,7 @@ var AIRTIME = (function(AIRTIME) {
             "</button>" +
         "</div>");
                   
-        $el.append($menu);
+        $menu.appendTo( $('.fg-toolbar', $el).get(0) );
     }
     
     function aggregateHistoryTable() {
@@ -356,11 +358,16 @@ var AIRTIME = (function(AIRTIME) {
             "sPaginationType": "full_numbers",
             "bJQueryUI": true,
             "bAutoWidth": true,
-            "sDom": sDom, 
-            "oTableTools": oTableTools
+            "dom": sDom,
+            "buttons": [
+                'copyHtml5',
+                'csv',
+                'pdfHtml5',
+                'print'
+            ],
+            "searchDelay": 350
         });
-        oTable.fnSetFilteringDelay(350);
-       
+
         return oTable;
     }
     
@@ -429,14 +436,21 @@ var AIRTIME = (function(AIRTIME) {
             "sPaginationType": "full_numbers",
             "bJQueryUI": true,
             "bAutoWidth": true,
-            "sDom": sDom, 
-            "oTableTools": oTableTools
+            "dom": sDom, 
+            "buttons": [
+                'copyHtml5',
+                'csv',
+                'pdfHtml5',
+                'print'
+            ],
+            "searchDelay": 350
         });
-        oTable.fnSetFilteringDelay(350);
-        
-        $toolbar = $historyTableDiv.parents(".dataTables_wrapper").find(".fg-toolbar:first");
-        createToolbarButtons($toolbar);
-         
+
+        createToolbarButtons(oTable.api(0).table().container());
+
+        oTable.api(0).buttons().container()
+            .appendTo( $('.btn-toolbar', oTable.api(0).table().container()).get(0) );
+
         return oTable;
     }
     
