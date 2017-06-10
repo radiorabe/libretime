@@ -169,7 +169,7 @@ $(document).ready(function () {
     self.startRefreshingRecentUploads = function () {
         if (!self.isRecentUploadsRefreshTimerActive) { //Prevent multiple timers from running
             self.recentUploadsRefreshTimer = setInterval(function() {
-                self.recentUploadsTable.fnDraw();
+                self.recentUploadsTable.api(0).draw();
             }, 3000);
             self.isRecentUploadsRefreshTimerActive = true;
         }
