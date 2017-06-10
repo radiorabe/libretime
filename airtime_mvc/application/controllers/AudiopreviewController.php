@@ -33,7 +33,7 @@ class AudiopreviewController extends Zend_Controller_Action
             $baseUrl.'lib/jPlayer/add-on/jplayer.playlist.js?' . $CC_CONFIG['airtime_version'],
             'text/javascript');
         $this->view->headLink()->appendStylesheet(
-            $baseUrl.'js/jplayer/skin/jplayer.airtime.audio.preview.css?'.$CC_CONFIG['airtime_version']);
+            $baseUrl.'css/jplayer.audio.preview.skin.css?'.$CC_CONFIG['airtime_version']);
         $this->_helper->layout->setLayout('audioPlayer');
 
         $logo = Application_Model_Preference::GetStationLogo();

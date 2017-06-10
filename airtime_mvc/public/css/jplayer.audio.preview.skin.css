@@ -96,24 +96,24 @@ div.jp-interface ul.jp-controls li.jp-pause {
 }
 
 div.jp-mute span {
-    background: url("jplayer.png") 0 -90px no-repeat;
+    background: url("../images/jplayer.png") 0 -90px no-repeat;
 }
 div.jp-mute span:hover {
-    background: url("jplayer.png") -30px -90px no-repeat;
+    background: url("../images/jplayer.png") -30px -90px no-repeat;
 }
 
 div.jp-unmute span {
-    background: url("jplayer.png") -60px -90px no-repeat;
+    background: url("../images/jplayer.png") -60px -90px no-repeat;
 }
 div.jp-unmute span:hover {
-    background: url("jplayer.png") -90px -90px no-repeat;
+    background: url("../images/jplayer.png") -90px -90px no-repeat;
 }
 
 div.jp-volume-max span {
-    background: url("jplayer.png") 0 -112px no-repeat;
+    background: url("../images/jplayer.png") 0 -112px no-repeat;
 }
 div.jp-volume-max span:hover {
-    background: url("jplayer.png") -30px -112px no-repeat;
+    background: url("../images/jplayer.png") -30px -112px no-repeat;
 }
 
 
@@ -161,7 +161,7 @@ div.jp-play-bar {
 
 /* The seeking class is added/removed inside jPlayer */
 div.jp-seeking-bg {
-	background: url("pbar-ani.gif");
+	background: url("../images/pbar-ani.gif");
 }
 
 /* @end */
