@@ -1,10 +1,11 @@
 <?php
 
-/** Our standard page layout initialization has to be done via a plugin
+/**
+ * Our standard page layout initialization has to be done via a plugin
  * because some of it requires session variables, and some of the routes
  * run without a session (like API calls). This is an optimization because
  * starting the session adds a fair amount of overhead.
- */
+ **/
 class PageLayoutInitPlugin extends Zend_Controller_Plugin_Abstract
 {
     protected $_bootstrap = null;
@@ -93,7 +94,7 @@ class PageLayoutInitPlugin extends Zend_Controller_Plugin_Abstract
             $userType = "";
         }
         $view->headScript()->appendScript("var userType = '$userType';");
-        
+
         // Dropzone also accept file extensions and doesn't correctly extract certain mimetypes (eg. FLAC - try it),
         // so we append the file extensions to the list of mimetypes and that makes it work.
         $mimeTypes = FileDataHelper::getAudioMimeTypeArray();
@@ -173,18 +174,19 @@ class PageLayoutInitPlugin extends Zend_Controller_Plugin_Abstract
 
         $baseUrl = Application_Common_OsPath::getBaseDir();
 
-        $view->headScript()->appendFile($baseUrl . 'js/libs/jquery-1.8.3.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/libs/jquery-ui-1.8.24.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/libs/angular.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+        $view->headScript()->appendFile($baseUrl . 'lib/jquery/jquery.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/jquery-ui/ui/minified/jquery-ui.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/angular/angular.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            // todo: upgrade to bootstrap 3.x to get minified js in lib/
             ->appendFile($baseUrl . 'js/bootstrap/bootstrap.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/libs/underscore-min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-
-            // ->appendFile($baseUrl . 'js/libs/jquery.stickyPanel.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/underscore/underscore-min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            // todo: qtip is not available on bower in our version, it probably makes sense to upgrade to qtip2 3.x when moving
             ->appendFile($baseUrl . 'js/qtip/jquery.qtip.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/jplayer/jquery.jplayer.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/sprintf/sprintf-0.7-beta1.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/cookie/jquery.cookie.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
-            ->appendFile($baseUrl . 'js/i18n/jquery.i18n.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/jPlayer/jquery.jplayer/jquery.jplayer.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/sprintf/dist/sprintf.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/jquery-cookie/jquery.cookie.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'lib/jquery-i18n/jquery.i18n.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+
             ->appendFile($baseUrl . 'locale/general-translation-table?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'locale/datatables-translation-table?' . $CC_CONFIG['airtime_version'], 'text/javascript')
 
@@ -210,6 +212,7 @@ class PageLayoutInitPlugin extends Zend_Controller_Plugin_Abstract
             ->appendFile($baseUrl . 'js/airtime/dashboard/helperfunctions.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'js/airtime/dashboard/dashboard.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
             ->appendFile($baseUrl . 'js/airtime/dashboard/versiontooltip.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            // todo: tipsy has local patches that need to be analyzed befor emoving to lib/
             ->appendFile($baseUrl . 'js/tipsy/jquery.tipsy.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
 
             ->appendFile($baseUrl . 'js/airtime/common/common.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')

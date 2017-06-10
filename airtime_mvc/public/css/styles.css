@@ -2894,7 +2894,7 @@ dt.block-display.info-block {
     margin: 0;
     padding:8px 2px;
 }
-.error-content .button-bar	{
+.error-content .button-bar    {
     margin-top:47px;
     padding-left:2px;
     text-align:center;
@@ -4384,4 +4384,54 @@ li .ui-state-hover {
 .upgrade-cta-button a {
     text-decoration: none;
     color: #f0f0f0;
+}
+
+/* Schedule specific changes to fullcalendar CSS */
+
+table.fc-header  {
+    background: #4a4a4a;
+    border-bottom: 1px solid #222;
+}
+
+#schedule_calendar > table > tbody > tr > td.fc-header-left
+{
+    padding: 5px 0px 0px 5px;
+}
+#schedule_calendar > table > tbody > tr > td.fc-header-center
+{
+    padding: 10px 5px 0px 0px;
+}
+#schedule_calendar > table > tbody > tr > td.fc-header-right
+{
+    padding: 5px 5px 0px 0px;
+}
+
+
+#schedule_calendar .fc-button-content {
+    height: 1.4em;
+    line-height: 1.4em;
+}
+
+#schedule_calendar .fc-event-skin {
+    color: #000;
+}
+#schedule_calendar .fc-border-separate tr.fc-last th,
+#schedule_calendar .fc-border-separate tr.fc-last td {
+    border-bottom: 1px solid #222;
+}
+
+#schedule_calendar .fc-event-vert .fc-event-bg {
+    background: #C3C3C3;
+    opacity: 0.15;
+    filter: alpha(opacity=15);
+}
+
+/** Prevent jQuery UI ui-widget-content box shadow from applying to fullcalendar... */
+#schedule_calendar .fc-view-month > table > tbody > tr > td.ui-widget-content,
+#schedule_calendar .fc-agenda-days > tbody > tr > td.ui-widget-content,
+#schedule_calendar .fc-agenda-slots > tbody > tr > td.ui-widget-content
+{
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 }

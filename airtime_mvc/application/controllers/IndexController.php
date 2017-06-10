@@ -13,16 +13,16 @@ class IndexController extends Zend_Controller_Action
         $CC_CONFIG = Config::getConfig();
         $baseUrl = Application_Common_OsPath::getBaseDir();
         $this->view->headTitle(Application_Model_Preference::GetHeadTitle());
-        $this->view->headScript()->appendFile($baseUrl . 'js/libs/jquery-1.8.3.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl . 'lib/jquery/jquery.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl . 'lib/jquery-i18n/jquery.i18n.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
 
-        $this->view->headScript()->appendFile($baseUrl . 'js/i18n/jquery.i18n.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
         $this->view->headScript()->appendFile($baseUrl . 'locale/general-translation-table?' . $CC_CONFIG['airtime_version'], 'text/javascript');
         $this->view->headScript()->appendScript("$.i18n.setDictionary(general_dict)");
         $this->view->headScript()->appendScript("var baseUrl='$baseUrl'");
 
         //jplayer
-        $this->view->headScript()->appendFile($baseUrl.'js/jplayer/jquery.jplayer.min.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/jplayer/jplayer.playlist.min.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl.'lib/jPlayer/jquery.jplayer/jquery.jplayer.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl.'lib/jPlayer/add-on/jplayer.playlist.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
 
         $this->view->headLink()->setStylesheet($baseUrl.'css/radio-page/radio-page.css?'.$CC_CONFIG['airtime_version']);
         $this->view->headLink()->appendStylesheet($baseUrl.'css/embed/weekly-schedule-widget.css?'.$CC_CONFIG['airtime_version']);
