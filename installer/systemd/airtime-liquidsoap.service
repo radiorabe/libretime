@@ -1,5 +1,13 @@
 [Unit]
 Description=Airtime Liquidsoap Service
+# The axialwrd service is part of the axial-alsa driver from paravel
+# and you won't be able to use axia alsa driveras if it isn't ready
+# when starting liquidsoap. The After will only trigger if the service
+# is installed and enabled.
+# See https://github.com/radiorabe/systemd-axia-alsa and
+# http://www.paravelsystems.com/ for more info on axia ALSA
+# Audio over IP driver.
+After=airtime-playout.service sound.target axialwrd.service
 
 [Service]
 ExecStart=/usr/bin/airtime-liquidsoap
