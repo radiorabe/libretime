@@ -3,6 +3,7 @@ language: php
 php:
 # the latest and greatest, has some issues that are excluded below in matrix.allow_failures
 - 7.2
+# 7.1 has some issues that are excluded below in matrix.allow_failures
 - 7.1
 # the 7.0 build demonstrates that everything is basically ok for 7.0, users might want to wait for 7.1 to run it
 - 7.0
@@ -29,11 +30,11 @@ matrix:
   - env: PYTHON=false
     php: 7.2
   exclude:
-  # by excluding all of python we make way to just runu python tests in one seperate instance
+  # by excluding all of python we make way to just run python tests in one seperate instance
   - env: PYTHON=true
   include:
   # using latest to run python on since it will last the longest
-  - php: 7.1 
+  - php: 7.2
     env: PYTHON=true
 addons:
   apt:
