@@ -64,6 +64,13 @@
                     </ul>
                 <?php endif; ?>
             </dd>
+            <dt id="<?php echo $s_name?>SSL-label">
+                <label for="<?php echo $s_name?>SSL"><?php echo $this->element->getElement('ssl')->getLabel() ?></label>
+            </dt>
+            <dd id="<?php echo $s_name?>SSL-element">
+                <?php echo $this->element->getElement('ssl')?>
+            </dd>
+
             <dt id="<?php echo $s_name?>Output-label">
                 <label for="<?php echo $s_name?>Output"><?php echo $this->element->getElement('output')->getLabel()?></label>
             </dt>

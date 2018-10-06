@@ -15,10 +15,11 @@ function rebuildStreamURL(ele){
     var div = ele.closest("div")
     host = div.find("input[id$=-host]").val()
     port = div.find("input[id$=-port]").val()
+    proto = div.find("input[id$=-ssl]").attr('checked') == 'checked' ? 'https' : 'http'
     mount = div.find("input[id$=-mount]").val()
     streamurl = ""
     if(div.find("select[id$=-output]").val()=="icecast"){
-        streamurl = "http://"+host
+        streamurl = proto + "://"+host
         if($.trim(port) != ""){
             streamurl += ":"+port
         }
@@ -26,7 +27,7 @@ function rebuildStreamURL(ele){
             streamurl += "/"+mount
         }
     }else{
-        streamurl = "http://"+host+":"+port+"/"
+        streamurl = proto + "://"+host+":"+port+"/"
     }
     div.find("#stream_url").html('<a href="' + streamurl + '" target="_blank">' + streamurl + '</a>')
 }

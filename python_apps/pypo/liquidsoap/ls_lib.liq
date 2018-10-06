@@ -93,7 +93,7 @@ def to_live(old,new) =
 end
 
 
-def output_to(output_type, type, bitrate, host, port, pass, mount_point, url, description, genre, user, s, stream, connected, name, channels) =
+def output_to(output_type, type, bitrate, host, port, ssl, pass, mount_point, url, description, genre, user, s, stream, connected, name, channels) =
     source = ref s
     def on_error(msg)
         connected := "false"
@@ -116,8 +116,14 @@ def output_to(output_type, type, bitrate, host, port, pass, mount_point, url, de
         if user == "" then
             user_ref := "source"
         end
+        proto = if ssl == "1" then
+            "https"
+        else
+            "http"
+        end
         output_mono = output.icecast(host = host,
                     port = port,
+                    protocol = proto,
                     password = pass,
                     mount = mount_point,
                     fallible = true,
@@ -131,6 +137,7 @@ def output_to(output_type, type, bitrate, host, port, pass, mount_point, url, de
 
         output_stereo = output.icecast(host = host,
                     port = port,
+                    protocol = proto,
                     password = pass,
                     mount = mount_point,
                     fallible = true,

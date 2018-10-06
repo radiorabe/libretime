@@ -75,10 +75,11 @@ class Application_Model_StreamSetting
             $host = $streamData[$prefix."host"];
             $port = $streamData[$prefix."port"];
             $mount = $streamData[$prefix."mount"];
+            $proto = $streamData[$prefix."ssl"] ? 'https' : 'http';
             if ($streamData[$prefix."output"] == "shoutcast") {
-                $url = "http://$host:$port/;"; //The semi-colon is important to make Shoutcast stream URLs play instead turn into a page.
+                $url = "$proto://$host:$port/;"; //The semi-colon is important to make Shoutcast stream URLs play instead turn into a page.
             } else { //Icecast
-                $url = "http://$host:$port/$mount";
+                $url = "$proto://$host:$port/$mount";
             }
             $streams[$id] = Array(
                 "url" => $url,
@@ -158,6 +159,7 @@ class Application_Model_StreamSetting
         self::ensureKeyExists($keyPrefix . 'genre', $data);
         self::ensureKeyExists($keyPrefix . 'host', $data);
         self::ensureKeyExists($keyPrefix . 'liquidsoap_error', $data, "waiting");
+        self::ensureKeyExists($keyPrefix . 'ssl', $data, "false");
         self::ensureKeyExists($keyPrefix . 'mount', $data);
         self::ensureKeyExists($keyPrefix . 'name', $data);
         self::ensureKeyExists($keyPrefix . 'output', $data);

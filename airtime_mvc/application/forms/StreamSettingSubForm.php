@@ -113,6 +113,13 @@ class Application_Form_StreamSettingSubForm extends Zend_Form_SubForm
                 ->setDecorators(array('ViewHelper'));
         $this->addElement($port);
 
+        $ssl = new Zend_Form_Element_Checkbox('ssl');
+        $ssl->setLabel(_('SSL:'));
+        $ssl->setValue($setting[$prefix.'_ssl']);
+        $ssl->setDecorators(array('ViewHelper'));
+        $this->addElement($ssl);
+        static::$customizable[] = $ssl->getName();
+
         $pass = new Zend_Form_Element_Text('pass');
         $pass->setLabel(_("Password"))
                 ->setValue($useDefaults ? $streamDefaults['pass'] :
