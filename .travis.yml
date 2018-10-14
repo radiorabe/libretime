@@ -54,10 +54,7 @@ addons:
     - python-gst-1.0
     - python-magic
 install:
-- >
-    if [[ "$PYTHON" == false ]]; then
-      composer install
-    fi
+- ./travis/install.php.sh
 - >
     if [[ "$PYTHON" == true ]]; then
       pip install --user mkdocs 
