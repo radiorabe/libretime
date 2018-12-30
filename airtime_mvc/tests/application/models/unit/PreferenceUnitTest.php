@@ -24,6 +24,10 @@ class PreferenceUnitTest extends PHPUnit_Framework_TestCase
     public function testSetShowsPopulatedUntil()
     {
         $date = new DateTime();
+        // override date with a timestamp since unix timstamps don't support
+        // subsecond precision and this rather superfluos test will fail if
+        // microseconds mismatch in 7.2+
+        $date->setTimestamp(time());
         Application_Model_Preference::SetShowsPopulatedUntil($date);
         $this->assertEquals(Application_Model_Preference::GetShowsPopulatedUntil(), $date);
     }

@@ -748,7 +748,12 @@ class Application_Model_Preference
 
     public static function GetImportTimestamp()
     {
-        return self::getValue("import_timestamp");
+        $ts = self::getValue("import_timestamp");
+        // make sure we return a numeric 0 if no preference has been set yet (would be "" otherwise and fail some comparison in 7.2+)
+        if ($ts == "") {
+            $ts = 0;
+        }
+        return $ts;
     }
 
     public static function GetStreamType()
