@@ -8,11 +8,7 @@ class LoginController extends Zend_Controller_Action
         $CC_CONFIG = Config::getConfig();
         $baseUrl = Application_Common_OsPath::getBaseDir();
 
-        $this->view->headLink(array('rel' => 'icon', 'href' => $baseUrl . 'favicon.ico?' . $CC_CONFIG['airtime_version'], 'type' => 'image/x-icon'), 'PREPEND')
-            ->appendStylesheet($baseUrl . 'css/bootstrap.css?' . $CC_CONFIG['airtime_version'])
-            ->appendStylesheet($baseUrl . 'css/redmond/jquery-ui-1.8.8.custom.css?' . $CC_CONFIG['airtime_version'])
-            ->appendStylesheet($baseUrl . 'css/styles.css?' . $CC_CONFIG['airtime_version']);
-
+        $this->view->headLink(array('rel' => 'icon', 'href' => $baseUrl . 'favicon.ico?' . $CC_CONFIG['airtime_version'], 'type' => 'image/x-icon'), 'PREPEND');
     }
 
     public function indexAction()
@@ -136,7 +132,8 @@ class LoginController extends Zend_Controller_Action
 
         $baseUrl = Application_Common_OsPath::getBaseDir();
 
-        $this->view->headScript()->appendFile($baseUrl . 'js/airtime/login/password-restore.js?' . $CC_CONFIG['airtime_version'], 'text/javascript');
+        $this->view->headScript()->appendFile($baseUrl . 'js/airtime/login/password-restore.js?' . $CC_CONFIG['airtime_version'], 'text/javascript')
+            ->appendFile($baseUrl . 'bundle.js', 'text/javascript');
 
         $request = $this->getRequest();
         $stationLocale = Application_Model_Preference::GetDefaultLocale();

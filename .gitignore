@@ -16,3 +16,6 @@ airtime_mvc/tests/log/*.log
 .vagrant/
 .DS_Store
 .idea/
+airtime_mvc/public/bundle.js
+airtime_mvc/public/ui/
+node_modules/

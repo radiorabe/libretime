@@ -190,7 +190,6 @@
 }
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
 	border: 1px solid #d00000;
-	background: #fae5e5 url(images/ui-bg_flat_55_fae5e5_40x100.png) 50% 50% repeat-x;
 	color: #d00000;
 }
 .ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a {
@@ -837,14 +836,12 @@
 }
 /* Overlays */
 .ui-widget-overlay {
-	background: #9d9d9d url(images/ui-bg_flat_0_9d9d9d_40x100.png) 50% 50% repeat-x;
 	opacity: .50;
 	filter:Alpha(Opacity=50);
 }
 .ui-widget-shadow {
 	margin: -6px 0 0 -6px;
 	padding: 6px;
-	background: #6c6c6c url(images/ui-bg_flat_0_6c6c6c_40x100.png) 50% 50% repeat-x;
 	opacity: .60;
 	filter:Alpha(Opacity=60);
 	-moz-border-radius: 0px;

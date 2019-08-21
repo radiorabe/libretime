@@ -65,7 +65,7 @@ class ErrorController extends Zend_Controller_Action {
     {
         $CC_CONFIG = Config::getConfig();
         $staticBaseDir = Application_Common_OsPath::formatDirectoryWithDirectorySeparators($CC_CONFIG['staticBaseDir']);
-        $this->view->headLink()->appendStylesheet($staticBaseDir . 'css/styles.css?' . $CC_CONFIG['airtime_version']);
+        $this->view->headScript()->appendFile($staticBaseDir . 'bundle.js', 'text/javascript');
     }
 
     public function getLog() {

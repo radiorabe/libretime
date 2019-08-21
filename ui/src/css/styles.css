@@ -2295,13 +2295,6 @@ span.errors.sp-errors{
     -moz-border-radius:2px;
     margin-top: 0px !important;
 }
-.small-icon.alert {
-    background:url(images/icon_alert.png) no-repeat;
-    float:left;
-    width:13px;
-    margin-right:3px;
-    margin-left:1px;
-}
 .small-icon.show-empty {
     background:url(images/icon_alert_cal_alt.png) no-repeat 0 0;
 }
@@ -2742,30 +2735,6 @@ fieldset legend .ui-icon, .ui-widget-content fieldset legend .ui-icon {
 
 input[type="checkbox"][disabled] {
     opacity: 0.6;
-}
-
-.play_small {
-    height:11px;
-    width: 15px;
-    display:inline-block;
-    background:url(images/play_pause_small.png) no-repeat 0 0;
-    margin:0 7px 0 0;
-    text-indent:-9999px;
-    overflow:hidden;
-    line-height:10px;
-}
-.play_small:hover, .play_small.paused  {
-    background-position: 0 -11px;
-}
-.play_small.paused:hover {
-    background-position: 0 -22px;
-}
-
-.play_small.playing {
-    background-position: -20px 0;
-}
-.play_small.playing:hover {
-    background-position: -20px -11px;
 }
 
 .info-text-small {
