@@ -23,7 +23,7 @@ class SmartBlock(models.Model):
         db_table = 'cc_block'
 
 
-class SmartBlockContents(models.Model):
+class SmartBlockContent(models.Model):
     block = models.ForeignKey(SmartBlock, models.DO_NOTHING, blank=True, null=True)
     file = models.ForeignKey('File', models.DO_NOTHING, blank=True, null=True)
     position = models.IntegerField(blank=True, null=True)
@@ -160,7 +160,7 @@ class LiveLog(models.Model):
         db_table = 'cc_live_log'
 
 
-class LoginAttempts(models.Model):
+class LoginAttempt(models.Model):
     ip = models.CharField(primary_key=True, max_length=32)
     attempts = models.IntegerField(blank=True, null=True)
 
@@ -188,7 +188,7 @@ class MusicDir(models.Model):
         db_table = 'cc_music_dirs'
 
 
-class Perms(models.Model):
+class Permission(models.Model):
     permid = models.IntegerField(primary_key=True)
     subj = models.ForeignKey('User', models.DO_NOTHING, db_column='subj', blank=True, null=True)
     action = models.CharField(max_length=20, blank=True, null=True)
@@ -214,7 +214,7 @@ class Playlist(models.Model):
         db_table = 'cc_playlist'
 
 
-class PlaylistContents(models.Model):
+class PlaylistContent(models.Model):
     playlist = models.ForeignKey(Playlist, models.DO_NOTHING, blank=True, null=True)
     file = models.ForeignKey(File, models.DO_NOTHING, blank=True, null=True)
     block = models.ForeignKey(SmartBlock, models.DO_NOTHING, blank=True, null=True)
@@ -276,7 +276,7 @@ class PlayoutHistoryTemplateField(models.Model):
         db_table = 'cc_playout_history_template_field'
 
 
-class Pref(models.Model):
+class Preference(models.Model):
     subjid = models.ForeignKey('User', models.DO_NOTHING, db_column='subjid', blank=True, null=True)
     keystr = models.CharField(unique=True, max_length=255, blank=True, null=True)
     valstr = models.TextField(blank=True, null=True)
@@ -317,7 +317,7 @@ class ServiceRegister(models.Model):
         db_table = 'cc_service_register'
 
 
-class Sess(models.Model):
+class Session(models.Model):
     sessid = models.CharField(primary_key=True, max_length=32)
     userid = models.ForeignKey('User', models.DO_NOTHING, db_column='userid', blank=True, null=True)
     login = models.CharField(max_length=255, blank=True, null=True)
@@ -368,7 +368,7 @@ class ShowDays(models.Model):
         db_table = 'cc_show_days'
 
 
-class ShowHosts(models.Model):
+class ShowHost(models.Model):
     show = models.ForeignKey(Show, models.DO_NOTHING)
     subjs = models.ForeignKey('User', models.DO_NOTHING)
 
@@ -377,7 +377,7 @@ class ShowHosts(models.Model):
         db_table = 'cc_show_hosts'
 
 
-class ShowInstances(models.Model):
+class ShowInstance(models.Model):
     description = models.CharField(max_length=8192, blank=True, null=True)
     starts = models.DateTimeField()
     ends = models.DateTimeField()
@@ -503,7 +503,7 @@ class WebstreamMetadata(models.Model):
         db_table = 'cc_webstream_metadata'
 
 
-class CeleryTasks(models.Model):
+class CeleryTask(models.Model):
     task_id = models.CharField(max_length=256)
     track_reference = models.ForeignKey('ThirdPartyTrackReferences', models.DO_NOTHING, db_column='track_reference')
     name = models.CharField(max_length=256, blank=True, null=True)
@@ -558,7 +558,7 @@ class Podcast(models.Model):
         db_table = 'podcast'
 
 
-class PodcastEpisodes(models.Model):
+class PodcastEpisode(models.Model):
     file = models.ForeignKey(File, models.DO_NOTHING, blank=True, null=True)
     podcast = models.ForeignKey(Podcast, models.DO_NOTHING)
     publication_date = models.DateTimeField()
@@ -580,7 +580,7 @@ class StationPodcast(models.Model):
         db_table = 'station_podcast'
 
 
-class ThirdPartyTrackReferences(models.Model):
+class ThirdPartyTrackReference(models.Model):
     service = models.CharField(max_length=256)
     foreign_id = models.CharField(unique=True, max_length=256, blank=True, null=True)
     file = models.ForeignKey(File, models.DO_NOTHING, blank=True, null=True)
@@ -590,3 +590,13 @@ class ThirdPartyTrackReferences(models.Model):
     class Meta:
         managed = False
         db_table = 'third_party_track_references'
+
+class TrackType(models.Model):
+    code = models.CharField(max_length=16, unique=True)
+    type_name = models.CharField(max_length=255, blank=True, null=True)
+    description = models.CharField(max_length=255, blank=True, null=True)
+    visibility = models.BooleanField(blank=True, default=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cc_track_types'
