@@ -16,7 +16,7 @@ from queue import Empty
 from threading import Thread, Timer
 from subprocess import Popen, PIPE
 
-from api_clients import api_client
+from api_clients import version1 as api_client
 from .timeout import ls_timeout
 
 

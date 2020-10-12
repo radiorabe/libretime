@@ -21,7 +21,7 @@ from threading import Thread
 
 import mutagen
 
-from api_clients import api_client as apc
+from api_clients import version1 as apc
 
 def api_client(logger):
     """
