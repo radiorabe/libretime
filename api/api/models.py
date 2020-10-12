@@ -237,7 +237,7 @@ class PlayoutHistory(models.Model):
     file = models.ForeignKey(File, models.DO_NOTHING, blank=True, null=True)
     starts = models.DateTimeField()
     ends = models.DateTimeField(blank=True, null=True)
-    instance = models.ForeignKey('ShowInstances', models.DO_NOTHING, blank=True, null=True)
+    instance = models.ForeignKey('ShowInstance', models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -298,7 +298,7 @@ class Schedule(models.Model):
     cue_in = models.DurationField()
     cue_out = models.DurationField()
     media_item_played = models.BooleanField(blank=True, null=True)
-    instance = models.ForeignKey('ShowInstances', models.DO_NOTHING)
+    instance = models.ForeignKey('ShowInstance', models.DO_NOTHING)
     playout_status = models.SmallIntegerField()
     broadcasted = models.SmallIntegerField()
     position = models.IntegerField()
@@ -505,7 +505,7 @@ class WebstreamMetadata(models.Model):
 
 class CeleryTask(models.Model):
     task_id = models.CharField(max_length=256)
-    track_reference = models.ForeignKey('ThirdPartyTrackReferences', models.DO_NOTHING, db_column='track_reference')
+    track_reference = models.ForeignKey('ThirdPartyTrackReference', models.DO_NOTHING, db_column='track_reference')
     name = models.CharField(max_length=256, blank=True, null=True)
     dispatch_time = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=256)

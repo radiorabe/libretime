@@ -1,17 +1,23 @@
 import os
+from .utils import read_config_file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LIBRETIME_CONF_DIR = os.getenv('LIBRETIME_CONF_DIR', '/etc/airtime')
+DEFAULT_CONFIG_PATH = os.path.join(LIBRETIME_CONF_DIR, 'airtime.conf')
+API_VERSION = '2.0.0'
 
+CONFIG = read_config_file(DEFAULT_CONFIG_PATH)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '1!h&ak55eg5_1dee@mg8&9iy)m+94d!l_89=@$zg=^##z6msue'
+# TODO: Generate at runtime based on api_key
+SECRET_KEY = CONFIG.get('general', 'api_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('LIBRETIME_DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -27,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -65,13 +72,11 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'airtime',
-        'USER': 'airtime',
-        'PASSWORD': 'airtime',
-        'HOST': 'localhost',
+        'NAME': CONFIG.get('database', 'dbname'),
+        'USER': CONFIG.get('database', 'dbuser'),
+        'PASSWORD': CONFIG.get('database', 'dbpass'),
+        'HOST': CONFIG.get('database', 'host'),
         'PORT': '5432',
     }
 }
@@ -122,3 +127,22 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'api.User'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(CONFIG.get('pypo', 'log_base_dir').replace('\'',''), 'api.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propogate': True,
+        },
+    },
+}

@@ -1,7 +1,7 @@
-from django.conf.urls import url, include
+from django.urls import include, path
 from rest_framework import routers
 
-from .serializers import *
+from .views import *
 
 router = routers.DefaultRouter()
 router.register('smart-blocks', SmartBlockViewSet)
@@ -47,6 +47,7 @@ router.register('third-party-track-references', ThirdPartyTrackReferenceViewSet)
 router.register('track-types', TrackTypeViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('v2/', include(router.urls)),
+    path('v2/version/', version),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

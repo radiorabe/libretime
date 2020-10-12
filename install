@@ -1019,6 +1019,13 @@ loudCmd "$python_bin ${AIRTIMEROOT}/python_apps/airtime_analyzer/setup.py instal
 systemInitInstall libretime-analyzer $web_user
 verbose "...Done"
 
+# TODO: Make this work. Requires uwsgi install and libretime-api init script
+verbose "\n * Installing api..."
+verbose "\n TODO: Make this work"
+loudCmd "python3 ${AIRTIMEROOT}/api/setup.py install --install-scripts=/usr/bin"
+#systemInitInstall libretime-api
+#verbose "...Done"
+
 verbose "\n * Setting permissions on /var/log/airtime..."
 # Make the airtime log directory group-writable
 loudCmd "chmod -R 775 /var/log/airtime"

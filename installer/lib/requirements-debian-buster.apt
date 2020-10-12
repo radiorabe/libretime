@@ -22,6 +22,7 @@ libmad-ocaml
 libopus0
 libportaudio2
 libpulse0
+libpq-dev
 libsamplerate0
 libsoundtouch-ocaml
 libtaglib-ocaml
