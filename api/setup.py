@@ -1,13 +1,15 @@
+import os
+import shutil
 from setuptools import setup, find_packages
 
 setup(
     name='libretime-api',
-    version='2.0.0alpha1',
+    version='2.0.0a1',
     packages=find_packages(),
     description='LibreTime API backend server',
     url='https://github.com/LibreTime/libretime',
     install_requires=[
-        'django',
+        'Django~=3.0',
         'djangorestframework',
         'markdown',
         'django-filter',
