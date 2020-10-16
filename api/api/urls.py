@@ -22,7 +22,7 @@ router.register('playout-history-metadata', PlayoutHistoryMetadataViewSet)
 router.register('playout-history-templates', PlayoutHistoryTemplateViewSet)
 router.register('playout-history-template-fields', PlayoutHistoryTemplateFieldViewSet)
 router.register('preferences', PreferenceViewSet)
-router.register('schedules', ScheduleViewSet)
+router.register('schedule', ScheduleViewSet)
 router.register('service-registers', ServiceRegisterViewSet)
 router.register('sessions', SessionViewSet)
 router.register('shows', ShowViewSet)
@@ -47,7 +47,7 @@ router.register('third-party-track-references', ThirdPartyTrackReferenceViewSet)
 router.register('track-types', TrackTypeViewSet)
 
 urlpatterns = [
-    path('v2/', include(router.urls)),
-    path('v2/version/', version),
+    path('api/v2/', include(router.urls)),
+    path('api/v2/version/', version),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

@@ -12,7 +12,7 @@ setup(
         'Django~=3.0',
         'djangorestframework',
         'markdown',
-        'django-filter',
+        'django-url-filter',
         'coreapi',
         'psycopg2',
     ],

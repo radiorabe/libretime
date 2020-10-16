@@ -10,14 +10,15 @@ os.chdir(script_path)
 
 setup(name='api_clients',
       version='1.0',
-      description='Airtime API Client',
-      url='http://github.com/sourcefabric/Airtime',
+      description='LibreTime API Client',
+      url='http://github.com/LibreTime/Libretime',
       author='sourcefabric',
       license='AGPLv3',
       packages=['api_clients'],
       scripts=[],
       install_requires=[
-        'configobj'
+          'configobj',
+          'python-dateutil',
       ],
       zip_safe=False,
       data_files=[])

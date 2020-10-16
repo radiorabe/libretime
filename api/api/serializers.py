@@ -110,9 +110,29 @@ class PreferenceSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
+    file_id = serializers.IntegerField(source='file.id', read_only=True)
+    stream_id = serializers.IntegerField(source='stream.id', read_only=True)
+    instance_id = serializers.IntegerField(source='instance.id', read_only=True)
     class Meta:
         model = Schedule
-        fields = '__all__'
+        fields = [
+            'item_url',
+            'id',
+            'starts',
+            'ends',
+            'clip_length',
+            'fade_in',
+            'fade_out',
+            'cue_in',
+            'cue_out',
+            'media_item_played',
+            'file',
+            'file_id',
+            'stream',
+            'stream_id',
+            'instance',
+            'instance_id',
+        ]
 
 class ServiceRegisterSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -127,7 +147,22 @@ class SessionSerializer(serializers.HyperlinkedModelSerializer):
 class ShowSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Show
-        fields = '__all__'
+        fields = [
+            'item_url',
+            'id',
+            'name',
+            'url',
+            'genre',
+            'description',
+            'color',
+            'background_color',
+            'linked',
+            'is_linkable',
+            'image_path',
+            'has_autoplaylist',
+            'autoplaylist_repeat',
+            'autoplaylist',
+        ]
 
 class ShowDaysSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -140,9 +175,29 @@ class ShowHostSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 class ShowInstanceSerializer(serializers.HyperlinkedModelSerializer):
+    show_id = serializers.IntegerField(source='show.id', read_only=True)
+    file_id = serializers.IntegerField(source='file.id', read_only=True)
     class Meta:
         model = ShowInstance
-        fields = '__all__'
+        fields = [
+            'item_url',
+            'id',
+            'description',
+            'starts',
+            'ends',
+            'record',
+            'rebroadcast',
+            'time_filled',
+            'created',
+            'last_scheduled',
+            'modified_instance',
+            'autoplaylist_built',
+            'show',
+            'show_id',
+            'instance',
+            'file',
+            'file_id',
+        ]
 
 class ShowRebroadcastSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -218,3 +273,7 @@ class TrackTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TrackType
         fields = '__all__'
+
+class TrackTypeViewSet(viewsets.ModelViewSet):
+    queryset = TrackType.objects.all()
+    serializer_class = TrackTypeSerializer
