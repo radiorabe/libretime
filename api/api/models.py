@@ -134,6 +134,7 @@ class File(models.Model):
     filesize = models.IntegerField()
     description = models.CharField(max_length=512, blank=True, null=True)
     artwork = models.CharField(max_length=512, blank=True, null=True)
+    track_type = models.CharField(max_length=16, blank=True, null=True)
 
     class Meta:
         managed = False

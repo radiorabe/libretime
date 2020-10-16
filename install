@@ -1072,6 +1072,7 @@ elif $is_centos_dist; then
 else
     loudCmd "a2enmod rewrite php5"
 fi
+loudCmd "a2enmod proxy proxy_http"
 
 if [ $skip_postgres -eq 0 ]; then
     loud "\n-----------------------------------------------------"

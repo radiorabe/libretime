@@ -1,4 +1,6 @@
-from rest_framework.decorators import api_view
+from django.conf import settings
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .serializers import *
 
@@ -81,6 +83,7 @@ class PreferenceViewSet(viewsets.ModelViewSet):
 class ScheduleViewSet(viewsets.ModelViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
+    filter_fields = ('starts', 'ends', 'playout_status', 'broadcasted')
 
 class ServiceRegisterViewSet(viewsets.ModelViewSet):
     queryset = ServiceRegister.objects.all()
@@ -167,5 +170,6 @@ class TrackTypeViewSet(viewsets.ModelViewSet):
     serializer_class = TrackTypeSerializer
 
 @api_view(['GET'])
+@permission_classes((AllowAny, ))
 def version(request, *args, **kwargs):
-    return Response({'version': settings.API_VERSION})
+    return Response({'api_version': settings.API_VERSION})
