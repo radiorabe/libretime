@@ -24,6 +24,10 @@ WEB_PORT_LISTEN
   ProxyPreserveHost On
   ProxyPass /api/v2/ http://localhost:8081/v2/
   ProxyPassReverse /api/v2/ http://localhost:8081/v2/
+  ProxyPass /static/rest_framework http://localhost:8081/static/rest_framework
+  ProxyPassReverse /static/rest_framework http://localhost:8081/static/rest_framework
+  ProxyPass /api-auth/ http://localhost:8081/api-auth/
+  ProxyPassReverse /api-auth/ http://localhost:8081/api-auth/
 
   <Directory WEB_ROOT>
 
