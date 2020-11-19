@@ -5,8 +5,9 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+import hashlib
 from django.db import models
-from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
 class SmartBlock(models.Model):
@@ -429,11 +430,41 @@ class StreamSetting(models.Model):
         managed = False
         db_table = 'cc_stream_setting'
 
+GUEST = 'G'
+DJ = 'H'
+PROGRAM_MANAGER = 'P'
+ADMIN = 'A'
+
+USER_TYPE_CHOICES = (
+    (GUEST, 'Guest'),
+    (DJ, 'DJ'),
+    (PROGRAM_MANAGER, 'Program Manager'),
+    (ADMIN, 'Admin'),
+)
+
+class UserManager(BaseUserManager):
+    def create_user(self, username, type, email, first_name, last_name, password):
+        user = self.model(username=username,
+                          type=type,
+                          email=email,
+                          first_name=first_name,
+                          last_name=last_name)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, email, first_name, last_name, password):
+        self.create_user(username, ADMIN, email, first_name, last_name, password)
+        user.save(using=self._db)
+        return user
+
+    def get_by_natural_key(self, username):
+        return self.get(username=username)
 
 class User(AbstractBaseUser):
     username = models.CharField(db_column='login', unique=True, max_length=255)
     password = models.CharField(db_column='pass', max_length=255)  # Field renamed because it was a Python reserved word.
-    type = models.CharField(max_length=1)
+    type = models.CharField(max_length=1, choices=USER_TYPE_CHOICES)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     last_login = models.DateTimeField(db_column='lastlogin', blank=True, null=True)
@@ -447,12 +478,42 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = ['type', 'email', 'first_name', 'last_name']
+    objects = UserManager()
 
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
 
     def get_short_name(self):
         return f'{self.first_name}'
+
+    def set_password(self, password):
+        if not password:
+            self.set_unusable_password()
+        else:
+            self.password = hashlib.md5(password.encode()).hexdigest()
+
+    def is_superuser(self):
+        return self.type == ADMIN
+
+    def is_staff(self):
+        return self.type == ADMIN
+
+    def check_password(self, password):
+        if self.has_usable_password():
+            test_password = hashlib.md5(password.encode()).hexdigest()
+            return test_password == self.password
+        return False
+
+    def has_perms(self, perm_list, obj=None):
+        if not self.is_active:
+            return False
+        if self.is_superuser():
+            return True
+        if len(perm_list) == 0:
+            return True
+        # TODO: Handle permissions for Program Managers, DJs and Guests for add and edit
+        print(perm_list)
+        return False
 
     class Meta:
         managed = False
