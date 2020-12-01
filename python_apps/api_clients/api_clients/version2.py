@@ -23,6 +23,7 @@ api_endpoints['webstream_url'] = 'webstreams/%%id%%/'
 api_endpoints['show_instance_url'] = 'show-instances/%%id%%/'
 api_endpoints['show_url'] = 'shows/%%id%%/'
 api_endpoints['file_url'] = 'files/%%id%%/'
+api_endpoints['file_download_url'] = 'files/%%id%%/download/'
 api_config['api_base'] = 'api/v2'
 
 class AirtimeApiClient:
@@ -59,15 +60,15 @@ class AirtimeApiClient:
             show = self.services.show_url(id=show_instance['show_id'])
 
             result['media'][key] = {
-                'start': start,
-                'end': end,
+                'start': start.strftime('%Y-%m-%d-%H-%M-%S'),
+                'end': end.strftime('%Y-%m-%d-%H-%M-%S'),
                 'row_id': item['id']
             }
             current = result['media'][key]
             if item['file']:
                 current['independent_event'] = False
                 current['type'] = 'file'
-                current['id'] = item['file']
+                current['id'] = item['file_id']
 
                 fade_in = time_in_milliseconds(datetime.time.fromisoformat(item['fade_in']))
                 fade_out = time_in_milliseconds(datetime.time.fromisoformat(item['fade_out']))
@@ -81,6 +82,9 @@ class AirtimeApiClient:
                 current['cue_out'] = cue_out
 
                 info = self.services.file_url(id=item['file_id'])
+                current['metadata'] = info
+                current['uri'] = item['file']
+                current['filesize'] = info['filesize']
             elif item['stream']:
                 current['independent_event'] = True
                 current['id'] = item['stream_id']
@@ -108,7 +112,7 @@ class AirtimeApiClient:
                     'row_id': current['row_id'],
                     'independent_event': current['independent_event'],
                 }
-                
+
                 result[f'{end.isoformat()}_0'] = {
                     'type': 'stream_output_end',
                     'start': current['end'],

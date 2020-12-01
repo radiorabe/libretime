@@ -75,7 +75,9 @@ class ApiRequest:
             else:
                 response = requests.get(final_url, params=params,
                                         timeout=ApiRequest.API_HTTP_REQUEST_TIMEOUT)
-            return response.json()
+            if 'application/json' in response.headers['content-type']:
+                return response.json()
+            return response
         except requests.exceptions.Timeout:
             self.logger.error('HTTP request to %s timed out', final_url)
             raise
@@ -139,7 +141,7 @@ def time_in_seconds(time):
     return time.hour * 60 * 60 + \
             time.minute * 60 + \
             time.second + \
-            time.microsecond / 1000.0
+            time.microsecond / 1000000.0
 
 def time_in_milliseconds(time):
     return time_in_seconds(time) * 1000
