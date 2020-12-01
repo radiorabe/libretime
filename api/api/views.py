@@ -1,6 +1,10 @@
+import os
 from django.conf import settings
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAdminUser
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework.decorators import api_view, action, permission_classes
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from .serializers import *
 from .permissions import IsOwnUser
@@ -29,6 +33,21 @@ class CountryViewSet(viewsets.ModelViewSet):
 class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
+
+    #TODO: Implement API Key authentication. The Django permissions currently
+    # set up assume that the request has a particular user associated, which is
+    # not true with an API Key
+    # https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
+    @action(detail=True, methods=['GET']) #, permission_classes=[IsAuthenticated])
+    def download(self, request, pk=None):
+        if pk is None:
+            return Response('No file requested', status=status.HTTP_400_BAD_REQUEST)
+        filename = get_object_or_404(File, pk=pk)
+        directory = filename.directory
+        path = os.path.join(directory.directory, filename.filepath)
+        response = FileResponse(open(path, 'rb'), content_type=filename.mime)
+        print(response)
+        return response
 
 class ListenerCountViewSet(viewsets.ModelViewSet):
     queryset = ListenerCount.objects.all()

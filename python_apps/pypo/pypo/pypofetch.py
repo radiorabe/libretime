@@ -345,7 +345,7 @@ class PypoFetch(Thread):
                 media_item = media[key]
                 if (media_item['type'] == 'file'):
                     fileExt = self.sanity_check_media_item(media_item)
-                    dst = os.path.join(download_dir, "{}{}".format(media_item['id'], fileExt))
+                    dst = os.path.join(download_dir, f'{media_item["id"]}{fileExt}')
                     media_item['dst'] = dst
                     media_item['file_ready'] = False
                     media_filtered[key] = media_item
