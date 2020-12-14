@@ -11,7 +11,7 @@ class IncompleteUrl(UrlException):
         self.url = url
 
     def __str__(self):
-        return f"Incomplete url: '{self.url}"
+        return "Incomplete url: '{}'".format(self.url)
 
 class UrlBadParam(UrlException):
     def __init__(self, url, param):
@@ -19,14 +19,14 @@ class UrlBadParam(UrlException):
         self.param = param
 
     def __str__(self):
-        return f"Bad param '{self.param}' passed into url: '{self.url}'"
+        return "Bad param '{}' passed into url: '{}'".format(self.param, self.url)
 
 class KeyAuth(AuthBase):
     def __init__(self, key):
         self.key = key
 
     def __call__(self, r):
-        r.headers['Authorization'] = f"Api-Key {self.key}"
+        r.headers['Authorization'] = "Api-Key {}".format(self.key)
         return r
 
 class ApcUrl:
@@ -73,7 +73,7 @@ class ApiRequest:
                                          data=_post_data, auth=self.auth,
                                          timeout=ApiRequest.API_HTTP_REQUEST_TIMEOUT)
             else:
-                response = requests.get(final_url, params=params,
+                response = requests.get(final_url, params=params, auth=self.auth,
                                         timeout=ApiRequest.API_HTTP_REQUEST_TIMEOUT)
             if 'application/json' in response.headers['content-type']:
                 return response.json()
@@ -113,7 +113,7 @@ class RequestProvider:
         base_url = self.config['general']['base_url']
         base_dir = self.config['general']['base_dir']
         api_base = self.config['api_base']
-        api_url = f"{protocol}://{base_url}:{base_port}/{base_dir}{api_base}/%%action%%"
+        api_url = "{protocol}://{base_url}:{base_port}/{base_dir}{api_base}/%%action%%".format(protocol=protocol, base_url=base_url, base_port=base_port, base_dir=base_dir, api_base=api_base)
         self.url = ApcUrl(api_url)
 
         # Now we must discover the possible actions
