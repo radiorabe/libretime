@@ -9,7 +9,7 @@ print(script_path)
 os.chdir(script_path)
 
 setup(name='api_clients',
-      version='1.0',
+      version='2.0.0',
       description='LibreTime API Client',
       url='http://github.com/LibreTime/Libretime',
       author='sourcefabric',
