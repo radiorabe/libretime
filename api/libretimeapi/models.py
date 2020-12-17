@@ -454,8 +454,7 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, email, first_name, last_name, password):
-        self.create_user(username, ADMIN, email, first_name, last_name, password)
-        user.save(using=self._db)
+        user = self.create_user(username, ADMIN, email, first_name, last_name, password)
         return user
 
     def get_by_natural_key(self, username):

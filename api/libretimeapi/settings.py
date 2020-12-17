@@ -138,6 +138,8 @@ if not DEBUG:
 
 AUTH_USER_MODEL = 'libretimeapi.User'
 
+TEST_RUNNER = 'libretimeapi.tests.runners.ManagedModelTestRunner'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
