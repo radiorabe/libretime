@@ -5,7 +5,7 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'libretimeapi.settings')
     os.environ.setdefault('LIBRETIME_DEBUG', 'True')
     try:
         from django.core.management import execute_from_command_line

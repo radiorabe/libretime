@@ -25,7 +25,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'api',
+    'libretimeapi',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'api.urls'
+ROOT_URLCONF = 'libretimeapi.urls'
 
 TEMPLATES = [
     {
@@ -64,7 +64,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'api.wsgi.application'
+WSGI_APPLICATION = 'libretimeapi.wsgi.application'
 
 
 # Database
@@ -106,7 +106,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'api.permissions.IsSystemToken',
+        'libretimeapi.permissions.IsSystemToken',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'url_filter.integrations.drf.DjangoFilterBackend',
@@ -134,7 +134,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'api.User'
+AUTH_USER_MODEL = 'libretimeapi.User'
 
 LOGGING = {
     'version': 1,
@@ -169,7 +169,7 @@ LOGGING = {
             'level': 'INFO',
             'propogate': True,
         },
-        'api': {
+        'libretimeapi': {
             'handlers': ['file', 'console'],
             'level': 'INFO',
             'propogate': True,
