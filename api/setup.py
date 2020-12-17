@@ -2,12 +2,17 @@ import os
 import shutil
 from setuptools import setup, find_packages
 
+script_path = os.path.dirname(os.path.realpath(__file__))
+print(script_path)
+os.chdir(script_path)
+
 setup(
     name='libretime-api',
     version='2.0.0a1',
-    packages=find_packages(),
+    packages=['libretimeapi'],
     description='LibreTime API backend server',
     url='https://github.com/LibreTime/libretime',
+    author='LibreTime Contributors',
     install_requires=[
         'Django~=3.0',
         'djangorestframework',
