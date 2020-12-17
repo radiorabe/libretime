@@ -9,10 +9,12 @@ os.chdir(script_path)
 setup(
     name='libretime-api',
     version='2.0.0a1',
-    packages=['libretimeapi'],
+    packages=find_packages(),
+    include_package_data=True,
     description='LibreTime API backend server',
     url='https://github.com/LibreTime/libretime',
     author='LibreTime Contributors',
+    scripts=['bin/libretime-api'],
     install_requires=[
         'Django~=3.0',
         'djangorestframework',

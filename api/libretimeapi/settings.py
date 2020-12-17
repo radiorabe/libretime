@@ -19,7 +19,7 @@ SECRET_KEY = CONFIG.get('general', 'api_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('LIBRETIME_DEBUG', False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -105,7 +105,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.DjangoModelPermissions',
         'libretimeapi.permissions.IsSystemToken',
     ],
     'DEFAULT_FILTER_BACKENDS': [
@@ -132,7 +132,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/api/static/'
+if not DEBUG:
+    STATIC_ROOT = os.getenv('LIBRETIME_STATIC_ROOT', '/usr/share/airtime/api')
 
 AUTH_USER_MODEL = 'libretimeapi.User'
 
