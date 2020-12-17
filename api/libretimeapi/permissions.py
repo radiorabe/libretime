@@ -11,6 +11,9 @@ class IsOwnUser(BasePermission):
 
 class IsSystemToken(BasePermission):
     def has_permission(self, request, view):
+        if request.user.is_authenticated:
+            return True
+
         auth_header = request.META.get('Authorization')
         if not auth_header:
             auth_header = request.META.get('HTTP_AUTHORIZATION', '')
