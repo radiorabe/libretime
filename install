@@ -1022,7 +1022,7 @@ ln -f -s /etc/init.d/uwsgi /etc/init.d/libretime-api
 sed -e "s/WEB_USER/${web_user}/g" \
     ${AIRTIMEROOT}/installer/uwsgi/libretime-api.ini > /etc/uwsgi/apps-available/libretime-api.ini
 ln -f -s /etc/uwsgi/apps-available/libretime-api.ini /etc/uwsgi/apps-enabled/libretime-api.ini
-systemInitCommand enable uwsgi
+systemInitCommand enable libretime-api
 verbose "...Done"
 
 verbose "\n * Setting permissions on /var/log/airtime..."
@@ -1210,8 +1210,8 @@ if [ "$selinux" = "t" ]; then
     verbose "...Done"
 fi
 
-verbose "\n * Reloading uwsgi..."
-systemInitCommand restart uwsgi
+verbose "\n * Reloading API..."
+systemInitCommand restart libretime-api
 verbose "\n * Reloading apache..."
 systemInitCommand restart ${apache_service}
 # NOTE: ip command works on all supported platforms
