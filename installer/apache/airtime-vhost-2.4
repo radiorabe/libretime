@@ -22,12 +22,12 @@ WEB_PORT_LISTEN
   AddOutputFilterByType DEFLATE application/json
 
   ProxyPreserveHost On
-  ProxyPass /api/v2/ http://localhost:8081/api/v2/
-  ProxyPassReverse /api/v2/ http://localhost:8081/api/v2/
-  ProxyPass /static/rest_framework http://localhost:8081/static/rest_framework
-  ProxyPassReverse /static/rest_framework http://localhost:8081/static/rest_framework
-  ProxyPass /api-auth/ http://localhost:8081/api-auth/
-  ProxyPassReverse /api-auth/ http://localhost:8081/api-auth/
+  ProxyPass /api/v2/ uwsgi://localhost:8081/v2/
+  ProxyPassReverse /api/v2/ uwsgi://localhost:8081/v2/
+  ProxyPass /static/rest_framework uwsgi://localhost:8081/static/rest_framework/
+  ProxyPassReverse /static/rest_framework uwsgi://localhost:8081/static/rest_framework/
+  ProxyPass /api-auth/ uwsgi://localhost:8081/api-auth/
+  ProxyPassReverse /api-auth/ uwsgi://localhost:8081/api-auth/
 
   <Directory WEB_ROOT>
       RewriteEngine On

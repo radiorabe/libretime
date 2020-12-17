@@ -59,6 +59,8 @@ rabbitmq-server
 silan
 systemd-sysv
 unzip
+uwsgi
+uwsgi-plugin-python3
 vorbisgain
 vorbis-tools
 vorbis-tools
