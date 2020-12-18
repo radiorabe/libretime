@@ -1018,6 +1018,10 @@ verbose "...Done"
 
 verbose "\n * Installing API..."
 loudCmd "python3 ${AIRTIMEROOT}/api/setup.py install --install-scripts=/usr/bin"
+if [[ -e /etc/init.d/libretime-api ]]; then
+    verbose "Service libretime-api already exists - stopping."
+    loudCmd "systemctl stop libretime-api"
+fi
 ln -f -s /etc/init.d/uwsgi /etc/init.d/libretime-api
 sed -e "s@WEB_USER@${web_user}@g" \
     -e "s@WEB_ROOT@${web_root}@g" \
@@ -1212,8 +1216,6 @@ if [ "$selinux" = "t" ]; then
     verbose "...Done"
 fi
 
-verbose "\n * Reloading API..."
-systemInitCommand restart libretime-api
 verbose "\n * Reloading apache..."
 systemInitCommand restart ${apache_service}
 # NOTE: ip command works on all supported platforms

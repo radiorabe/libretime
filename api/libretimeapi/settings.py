@@ -1,20 +1,25 @@
+import configparser
 import os
-from .utils import read_config_file
+from .utils import read_config_file, get_random_string
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIBRETIME_CONF_DIR = os.getenv('LIBRETIME_CONF_DIR', '/etc/airtime')
-DEFAULT_CONFIG_PATH = os.path.join(LIBRETIME_CONF_DIR, 'airtime.conf')
+DEFAULT_CONFIG_PATH = os.getenv('LIBRETIME_CONF_FILE',
+                                os.path.join(LIBRETIME_CONF_DIR, 'airtime.conf'))
 API_VERSION = '2.0.0'
 
-CONFIG = read_config_file(DEFAULT_CONFIG_PATH)
+try:
+    CONFIG = read_config_file(DEFAULT_CONFIG_PATH)
+except IOError:
+    CONFIG = configparser.ConfigParser()
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# TODO: Generate at runtime based on api_key
-SECRET_KEY = CONFIG.get('general', 'api_key')
+SECRET_KEY = get_random_string(CONFIG.get('general', 'api_key', fallback=''))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('LIBRETIME_DEBUG', False)
@@ -73,10 +78,10 @@ WSGI_APPLICATION = 'libretimeapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': CONFIG.get('database', 'dbname'),
-        'USER': CONFIG.get('database', 'dbuser'),
-        'PASSWORD': CONFIG.get('database', 'dbpass'),
-        'HOST': CONFIG.get('database', 'host'),
+        'NAME': CONFIG.get('database', 'dbname', fallback=''),
+        'USER': CONFIG.get('database', 'dbuser', fallback=''),
+        'PASSWORD': CONFIG.get('database', 'dbpass', fallback=''),
+        'HOST': CONFIG.get('database', 'host', fallback=''),
         'PORT': '5432',
     }
 }
@@ -158,7 +163,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(CONFIG.get('pypo', 'log_base_dir').replace('\'',''), 'api.log'),
+            'filename': os.path.join(CONFIG.get('pypo', 'log_base_dir', fallback='.').replace('\'',''), 'api.log'),
         },
         'console': {
             'level': 'INFO',
