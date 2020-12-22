@@ -41,7 +41,7 @@ jobs:
         run: |
           composer install --no-progress --dev
           cd airtime_mvc/tests
-          php ../../vendor/bin/phpunit
+          php ../../vendor/bin/phpunit --process-isolation
   test-xenial:
     runs-on: ubuntu-16.04
     steps:
