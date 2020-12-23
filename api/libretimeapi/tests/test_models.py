@@ -1,8 +1,8 @@
-from django.test import TestCase
+from rest_framework.test import APITestCase
 from libretimeapi.models import User, DJ
 
 
-class TestUserManager(TestCase):
+class TestUserManager(APITestCase):
     def test_create_user(self):
         user = User.objects.create_user('test',
                                         email='test@example.com',
