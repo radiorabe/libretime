@@ -34,11 +34,7 @@ class FileViewSet(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
 
-    #TODO: Implement API Key authentication. The Django permissions currently
-    # set up assume that the request has a particular user associated, which is
-    # not true with an API Key
-    # https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
-    @action(detail=True, methods=['GET']) #, permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=['GET'])
     def download(self, request, pk=None):
         if pk is None:
             return Response('No file requested', status=status.HTTP_400_BAD_REQUEST)
@@ -46,7 +42,6 @@ class FileViewSet(viewsets.ModelViewSet):
         directory = filename.directory
         path = os.path.join(directory.directory, filename.filepath)
         response = FileResponse(open(path, 'rb'), content_type=filename.mime)
-        print(response)
         return response
 
 class ListenerCountViewSet(viewsets.ModelViewSet):
