@@ -1,5 +1,8 @@
+import logging
 from rest_framework.permissions import IsAdminUser, BasePermission
 from django.conf import settings
+
+logger = logging.getLogger(__name__)
 
 class IsOwnUser(BasePermission):
     def has_permission(self, request, view):
@@ -9,9 +12,10 @@ class IsOwnUser(BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.username == request.user
 
-class IsSystemToken(BasePermission):
+class IsSystemTokenOrUser(BasePermission):
     def has_permission(self, request, view):
         if request.user and request.user.is_authenticated:
+            # Can do further user-based permissions here
             return True
 
         auth_header = request.META.get('Authorization')
