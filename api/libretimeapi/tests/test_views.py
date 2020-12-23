@@ -30,7 +30,7 @@ class TestFileViewSet(APITestCase):
                                                       'resources'))
         f = baker.make('libretimeapi.File',
                        directory=music_dir,
-                       mime='application/mp3',
+                       mime='audio/mp3',
                        filepath='song.mp3')
         path = self.path.replace('%%id%%', str(f.pk))
         self.client.credentials(HTTP_AUTHORIZATION=f'Api-Key {self.token}')
