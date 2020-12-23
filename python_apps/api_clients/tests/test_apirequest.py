@@ -1,7 +1,7 @@
 import unittest
 import json
 from mock import MagicMock, patch
-from api_clients.version1 import ApcUrl, ApiRequest
+from api_clients.utils import ApcUrl, ApiRequest
 
 class ResponseInfo:
     def get_content_type(self):

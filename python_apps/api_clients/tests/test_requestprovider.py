@@ -2,7 +2,8 @@ import unittest
 import json
 from mock import patch, MagicMock
 from configobj import ConfigObj
-from api_clients.version1 import RequestProvider, api_config
+from api_clients.version1 import api_config
+from api_clients.utils import RequestProvider
 
 class TestRequestProvider(unittest.TestCase):
     def setUp(self):
