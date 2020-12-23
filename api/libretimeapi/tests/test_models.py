@@ -1,5 +1,4 @@
 from django.test import TestCase, Client
-from libretimeapi.permissions import IsSystemToken
 from libretimeapi.models import User, DJ
 
 
