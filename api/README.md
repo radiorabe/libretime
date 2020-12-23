@@ -29,3 +29,10 @@ sudo systemctl restart libretime-analyzer libretime-celery libretime-liquidsoap 
 cd /vagrant/api
 sudo -u www-data LIBRETIME_DEBUG=True python3 manage.py runserver 0.0.0.0:8081
 ```
+
+## 3rd Party Licences
+`libretimeapi/tests/resources/song.mp3`: Steps - Tears On The Dancefloor (Album
+Teaser) by mceyedol. Downloaded from
+https://soundcloud.com/mceyedol/steps-tears-on-the-dancefloor-album-teaser
+released under a Creative Commons Licence
+([cc-by-sa-nc-sa](https://creativecommons.org/licenses/by-nc-sa/3.0/))

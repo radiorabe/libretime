@@ -16,11 +16,12 @@ setup(
     author='LibreTime Contributors',
     scripts=['bin/libretime-api'],
     install_requires=[
+        'coreapi',
         'Django~=3.0',
         'djangorestframework',
-        'markdown',
         'django-url-filter',
-        'coreapi',
+        'markdown',
+        'model_bakery',
         'psycopg2',
     ],
     project_urls={
