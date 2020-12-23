@@ -5,6 +5,7 @@ from django.test import TestCase, Client, RequestFactory
 from libretimeapi.permissions import IsSystemTokenOrUser
 from libretimeapi.models import DJ
 
+
 class TestIsSystemTokenOrUser(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -41,4 +42,3 @@ class TestIsSystemTokenOrUser(TestCase):
         request.META['Authorization'] = f'Api-Key {token}'
         allowed = IsSystemTokenOrUser().has_permission(request, None)
         self.assertTrue(allowed)
-
