@@ -18,7 +18,7 @@ class TestApiRequest(unittest.TestCase):
         read.read = MagicMock(return_value=ret)
         read.info = MagicMock(return_value=ResponseInfo())
         u = 'http://localhost/testing'
-        with patch('urllib.request.urlopen') as mock_method:
+        with patch('requests.get') as mock_method:
             mock_method.return_value = read
             request = ApiRequest('mm', ApcUrl(u))()
             self.assertEqual(request, json.loads(ret))
