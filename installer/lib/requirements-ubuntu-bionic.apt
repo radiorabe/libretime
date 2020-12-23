@@ -71,6 +71,8 @@ rabbitmq-server
 silan
 sysvinit-utils
 unzip
+uwsgi
+uwsgi-plugin-python3
 vorbisgain
 vorbis-tools
 xmlstarlet

@@ -64,4 +64,6 @@ vorbisgain
 vorbis-tools
 vorbis-tools
 xmlstarlet
+uwsgi
+uwsgi-plugin-python3
 zip
