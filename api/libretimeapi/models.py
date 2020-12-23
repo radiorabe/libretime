@@ -580,7 +580,7 @@ class CloudFile(models.Model):
     storage_backend = models.CharField(max_length=512)
     resource_id = models.TextField()
     filename = models.ForeignKey(File, models.DO_NOTHING, blank=True, null=True,
-                                 db_column='cc_file')
+                                 db_column='cc_file_id')
 
     class Meta:
         managed = False

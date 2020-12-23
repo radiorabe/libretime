@@ -2,10 +2,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
 from django.test import TestCase, Client, RequestFactory
-from libretimeapi.permissions import IsSystemToken
+from libretimeapi.permissions import IsSystemTokenOrUser
 from libretimeapi.models import DJ
 
-class TestIsSystemToken(TestCase):
+class TestIsSystemTokenOrUser(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.path = "/api/v2/files/"
@@ -31,7 +31,7 @@ class TestIsSystemToken(TestCase):
         request = RequestFactory().get(self.path)
         request.user = AnonymousUser()
         request.META['Authorization'] = f'Api-Key {token}'
-        allowed = IsSystemToken().has_permission(request, None)
+        allowed = IsSystemTokenOrUser().has_permission(request, None)
         self.assertFalse(allowed)
 
     def test_token_correct(self):
@@ -39,6 +39,6 @@ class TestIsSystemToken(TestCase):
         request = RequestFactory().get(self.path)
         request.user = AnonymousUser()
         request.META['Authorization'] = f'Api-Key {token}'
-        allowed = IsSystemToken().has_permission(request, None)
+        allowed = IsSystemTokenOrUser().has_permission(request, None)
         self.assertTrue(allowed)
 

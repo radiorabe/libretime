@@ -110,8 +110,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissions',
-        'libretimeapi.permissions.IsSystemToken',
+        'libretimeapi.permissions.IsSystemTokenOrUser',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'url_filter.integrations.drf.DjangoFilterBackend',
@@ -153,6 +152,10 @@ LOGGING = {
             'format': '{levelname} {message}',
             'style': '{',
         },
+        'verbose': {
+            'format': '{asctime} {module} {levelname} {message}',
+            'style': '{',
+        }
     },
     'filters': {
         'require_debug_true': {
@@ -164,6 +167,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': os.path.join(CONFIG.get('pypo', 'log_base_dir', fallback='.').replace('\'',''), 'api.log'),
+            'formatter': 'verbose',
         },
         'console': {
             'level': 'INFO',
