@@ -1,5 +1,5 @@
 import logging
-from rest_framework.permissions import IsAdminUser, BasePermission
+from rest_framework.permissions import BasePermission
 from django.conf import settings
 
 logger = logging.getLogger(__name__)
