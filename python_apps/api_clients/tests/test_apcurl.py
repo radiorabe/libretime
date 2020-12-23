@@ -1,5 +1,5 @@
 import unittest
-from api_clients.version1 import ApcUrl, UrlBadParam, IncompleteUrl
+from api_clients.utils import ApcUrl, UrlBadParam, IncompleteUrl
 
 class TestApcUrl(unittest.TestCase):
     def test_init(self):
