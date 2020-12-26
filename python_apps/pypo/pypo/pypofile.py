@@ -16,6 +16,7 @@ import configparser
 import json
 import hashlib
 from requests.exceptions import ConnectionError, HTTPError, Timeout
+from api_clients import version2 as api_client
 
 CONFIG_PATH = '/etc/airtime/airtime.conf'
 
@@ -31,6 +32,7 @@ class PypoFile(Thread):
         self.media = None
         self.cache_dir = os.path.join(config["cache_dir"], "scheduler")
         self._config = self.read_config_file(CONFIG_PATH)
+        self.api_client = api_client.AirtimeApiClient()
 
     def copy_file(self, media_item):
         """
@@ -44,6 +46,8 @@ class PypoFile(Thread):
         dst_exists = True
         try:
             dst_size = os.path.getsize(dst)
+            if dst_size == 0:
+                dst_exists = False
         except Exception as e:
             dst_exists = False
 
@@ -64,35 +68,16 @@ class PypoFile(Thread):
         if do_copy:
             self.logger.info("copying from %s to local cache %s" % (src, dst))
 
-            CONFIG_SECTION = "general"
-            username = self._config.get(CONFIG_SECTION, 'api_key')
-            baseurl = self._config.get(CONFIG_SECTION, 'base_url')
             try:
-                port = self._config.get(CONFIG_SECTION, 'base_port')
-            except NoOptionError as e:
-                port = 80
-            try:
-                protocol = self._config.get(CONFIG_SECTION, 'protocol')
-            except NoOptionError as e:
-                protocol = str(("http", "https")[int(port) == 443])
-
-            try:
-                host = [protocol, baseurl, port]
-                url = "%s://%s:%s/rest/media/%s/download" % (host[0],
-                                                             host[1],
-                                                             host[2],
-                                                             media_item["id"])
                 with open(dst, "wb") as handle:
-                    response = requests.get(url, auth=requests.auth.HTTPBasicAuth(username, ''), stream=True, verify=False)
+                    self.logger.info(media_item)
+                    response = self.api_client.services.file_download_url(id=media_item['id'])
                     
                     if not response.ok:
                         self.logger.error(response)
                         raise Exception("%s - Error occurred downloading file" % response.status_code)
                     
-                    for chunk in response.iter_content(1024):
-                        if not chunk:
-                            break
-                        
+                    for chunk in response.iter_content(chunk_size=1024):
                         handle.write(chunk)
 
                 #make file world readable and owner writable
