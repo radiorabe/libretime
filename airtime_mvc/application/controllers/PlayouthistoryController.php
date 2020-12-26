@@ -42,6 +42,9 @@ class PlayouthistoryController extends Zend_Controller_Action
 
         $this->view->date_form = $form;
 
+        // load page specific components for new vue frontend
+        $this->view->headScript()->appendFile($baseUrl . 'js/analyticsplayouthistory.js');
+
         $this->view->headScript()->appendFile($baseUrl.'js/contextmenu/jquery.contextMenu.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'js/datatables/js/jquery.dataTables.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
         $this->view->headScript()->appendFile($baseUrl.'js/datatables/plugin/dataTables.pluginAPI.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
