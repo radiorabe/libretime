@@ -85,6 +85,7 @@ class PlaylistContentSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 class PlayoutHistorySerializer(serializers.HyperlinkedModelSerializer):
+    file = FileSerializer(read_only=True)
     class Meta:
         model = PlayoutHistory
         fields = '__all__'
