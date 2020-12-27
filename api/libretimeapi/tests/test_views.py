@@ -9,17 +9,17 @@ from libretimeapi.views import FileViewSet
 class TestFileViewSet(APITestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.path = "/api/v2/files/%%id%%/download/"
+        cls.path = "/api/v2/files/{id}/download/"
         cls.token = settings.CONFIG.get('general', 'api_key')
 
     def test_invalid(self):
-        path = self.path.replace('%%id%%', 'a')
+        path = self.path.format(id='a')
         self.client.credentials(HTTP_AUTHORIZATION=f'Api-Key {self.token}')
         response = self.client.get(path)
         self.assertEqual(response.status_code, 400)
 
     def test_does_not_exist(self):
-        path = self.path.replace('%%id%%', '1')
+        path = self.path.format(id='1')
         self.client.credentials(HTTP_AUTHORIZATION=f'Api-Key {self.token}')
         response = self.client.get(path)
         self.assertEqual(response.status_code, 404)
@@ -32,7 +32,7 @@ class TestFileViewSet(APITestCase):
                        directory=music_dir,
                        mime='audio/mp3',
                        filepath='song.mp3')
-        path = self.path.replace('%%id%%', str(f.pk))
+        path = self.path.format(id=str(f.pk))
         self.client.credentials(HTTP_AUTHORIZATION=f'Api-Key {self.token}')
         response = self.client.get(path)
         self.assertEqual(response.status_code, 200)
