@@ -2,8 +2,6 @@ import configparser
 import os
 from .utils import read_config_file, get_random_string
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LIBRETIME_CONF_DIR = os.getenv('LIBRETIME_CONF_DIR', '/etc/airtime')
 DEFAULT_CONFIG_PATH = os.getenv('LIBRETIME_CONF_FILE',
                                 os.path.join(LIBRETIME_CONF_DIR, 'airtime.conf'))
