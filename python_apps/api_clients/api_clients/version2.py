@@ -19,11 +19,11 @@ api_endpoints = {}
 
 api_endpoints['version_url'] = 'version/'
 api_endpoints['schedule_url'] = 'schedule/'
-api_endpoints['webstream_url'] = 'webstreams/%%id%%/'
-api_endpoints['show_instance_url'] = 'show-instances/%%id%%/'
-api_endpoints['show_url'] = 'shows/%%id%%/'
-api_endpoints['file_url'] = 'files/%%id%%/'
-api_endpoints['file_download_url'] = 'files/%%id%%/download/'
+api_endpoints['webstream_url'] = 'webstreams/{id}/'
+api_endpoints['show_instance_url'] = 'show-instances/{id}/'
+api_endpoints['show_url'] = 'shows/{id}/'
+api_endpoints['file_url'] = 'files/{id}/'
+api_endpoints['file_download_url'] = 'files/{id}/download/'
 api_config['api_base'] = 'api/v2'
 
 class AirtimeApiClient:

@@ -38,15 +38,14 @@ class ApcUrl:
     def params(self, **params):
         temp_url = self.base_url
         for k, v in params.items():
-            wrapped_param = "%%" + k + "%%"
-            if wrapped_param in temp_url:
-                temp_url = temp_url.replace(wrapped_param, str(v))
-            else:
+            wrapped_param = "{" + k + "}"
+            if not wrapped_param in temp_url:
                 raise UrlBadParam(self.base_url, k)
+        temp_url = temp_url.format(**params)
         return ApcUrl(temp_url)
 
     def url(self):
-        if '%%' in self.base_url:
+        if '{' in self.base_url:
             raise IncompleteUrl(self.base_url)
         else:
             return self.base_url
@@ -113,13 +112,19 @@ class RequestProvider:
         base_url = self.config['general']['base_url']
         base_dir = self.config['general']['base_dir']
         api_base = self.config['api_base']
-        api_url = "{protocol}://{base_url}:{base_port}/{base_dir}{api_base}/%%action%%".format(protocol=protocol, base_url=base_url, base_port=base_port, base_dir=base_dir, api_base=api_base)
+        api_url = "{protocol}://{base_url}:{base_port}/{base_dir}{api_base}/{action}".format(
+            protocol=protocol,
+            base_url=base_url,
+            base_port=base_port,
+            base_dir=base_dir,
+            api_base=api_base
+        )
         self.url = ApcUrl(api_url)
 
         # Now we must discover the possible actions
         for action_name, action_value in endpoints.items():
             new_url = self.url.params(action=action_value)
-            if '%%api_key%%' in action_value:
+            if '{api_key}' in action_value:
                 new_url = new_url.params(api_key=self.config["general"]['api_key'])
             self.requests[action_name] = ApiRequest(action_name,
                                                     new_url,
