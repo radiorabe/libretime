@@ -29,7 +29,7 @@ signal.signal(signal.SIGINT, keyboardInterruptHandler)
 
 logging.captureWarnings(True)
 
-POLL_INTERVAL = 10
+POLL_INTERVAL = 400
 
 class PypoFetch(Thread):
 
