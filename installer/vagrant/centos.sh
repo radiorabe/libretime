@@ -8,16 +8,20 @@ dnf install -y https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-8.no
 dnf config-manager --enable powertools
 
 # xiph multimedia (for icecast)
-curl -o /etc/yum.repos.d/multimedia:xiph.repo \
+curl -s -o /etc/yum.repos.d/multimedia:xiph.repo \
     https://download.opensuse.org/repositories/multimedia:/xiph/CentOS_8/multimedia:xiph.repo
 
 # RaBe Liquidsoap Distribution (RaBe LSD)
-curl -o /etc/yum.repos.d/home:radiorabe:liquidsoap.repo \
+curl -s -o /etc/yum.repos.d/home:radiorabe:liquidsoap.repo \
     https://download.opensuse.org/repositories/home:/radiorabe:/liquidsoap/CentOS_8/home:radiorabe:liquidsoap.repo
 
 # RaBe Audio Packages for Enterprise Linux (RaBe APEL)
-curl -o /etc/yum.repos.d/home:radiorabe:audio.repo \
+curl -s -o /etc/yum.repos.d/home:radiorabe:audio.repo \
     https://download.opensuse.org/repositories/home:/radiorabe:/audio/CentOS_8/home:radiorabe:audio.repo
+
+# yarn for ui development
+curl -s -o /etc/yum.repos.d/yarn.repo \
+    https://dl.yarnpkg.com/rpm/yarn.repo
 
 # Update all the things (just to be sure we are on latest)
 yum update -y
@@ -79,6 +83,7 @@ yum install -y \
   git \
   glib2-devel \
   gobject-introspection-devel \
+  yarn \
   openssl-devel \
   php \
   php-xml \
@@ -88,10 +93,12 @@ yum install -y \
   php-mbstring \
   php-json \
   php-process \
-  python36-devel \
+  python38-devel \
+  python38-psycopg2 \
   httpd \
   icecast \
   liquidsoap \
+  @nodejs \
   alsa-utils \
   selinux-policy \
   policycoreutils-python-utils \

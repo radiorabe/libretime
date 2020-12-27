@@ -26,56 +26,10 @@ class PlayouthistoryController extends Zend_Controller_Action
 
         Zend_Layout::getMvcInstance()->assign('parent_page', 'Analytics');
 
-        list($startsDT, $endsDT) = Application_Common_HTTPHelper::getStartEndFromRequest($this->getRequest());
-       
-        $userTimezone = new DateTimeZone(Application_Model_Preference::GetUserTimezone());
-        $startsDT->setTimezone($userTimezone);
-        $endsDT->setTimezone($userTimezone);
-
-        $form = new Application_Form_DateRange();
-        $form->populate(array(
-            'his_date_start' => $startsDT->format("Y-m-d"),
-            'his_time_start' => $startsDT->format("H:i"),
-            'his_date_end' => $endsDT->format("Y-m-d"),
-            'his_time_end' => $endsDT->format("H:i")
-        ));
-
-        $this->view->date_form = $form;
-
         // load page specific components for new vue frontend
         $this->view->headScript()->appendFile($baseUrl . 'js/analyticsplayouthistory.js');
-
-        $this->view->headScript()->appendFile($baseUrl.'js/contextmenu/jquery.contextMenu.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/datatables/js/jquery.dataTables.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/datatables/plugin/dataTables.pluginAPI.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/datatables/plugin/dataTables.fnSetFilteringDelay.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/datatables/plugin/TableTools-2.1.5/js/ZeroClipboard.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/datatables/plugin/TableTools-2.1.5/js/TableTools.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-
-        $this->view->headScript()->appendFile($baseUrl.'js/timepicker/jquery.ui.timepicker.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/bootstrap-datetime/bootstrap-datetimepicker.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/airtime/buttons/buttons.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/airtime/utilities/utilities.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-        $this->view->headScript()->appendFile($baseUrl.'js/airtime/playouthistory/historytable.js?'.$CC_CONFIG['airtime_version'],'text/javascript');
-
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/bootstrap-datetimepicker.min.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'js/datatables/plugin/TableTools-2.1.5/css/TableTools.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/jquery.ui.timepicker.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/playouthistory.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/history_styles.css?'.$CC_CONFIG['airtime_version']);
-        $this->view->headLink()->appendStylesheet($baseUrl.'css/jquery.contextMenu.css?'.$CC_CONFIG['airtime_version']);
-
-        //set datatables columns for display of data.
-        $historyService = new Application_Service_HistoryService();
-        $columns = json_encode($historyService->getDatatablesLogSheetColumns());
-        $script = "localStorage.setItem( 'datatables-historyitem-aoColumns', JSON.stringify($columns) ); ";
-
-        $columns = json_encode($historyService->getDatatablesFileSummaryColumns());
-        $script.= "localStorage.setItem( 'datatables-historyfile-aoColumns', JSON.stringify($columns) );";
-        $this->view->headScript()->appendScript($script);
-
-        $user = Application_Model_User::getCurrentUser();
-        $this->view->userType = $user->getType();
+        $this->view->headLink()->appendStylesheet($baseUrl . 'css/chunk-vendors.css');
+        $this->view->headLink()->appendStylesheet($baseUrl . 'css/analyticsplayouthistory.css');
     }
 
     public function fileHistoryFeedAction()

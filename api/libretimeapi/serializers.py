@@ -84,16 +84,25 @@ class PlaylistContentSerializer(serializers.HyperlinkedModelSerializer):
         model = PlaylistContent
         fields = '__all__'
 
-class PlayoutHistorySerializer(serializers.HyperlinkedModelSerializer):
-    file = FileSerializer(read_only=True)
-    class Meta:
-        model = PlayoutHistory
-        fields = '__all__'
-
 class PlayoutHistoryMetadataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PlayoutHistoryMetadata
         fields = '__all__'
+
+class PlayoutHistorySerializer(serializers.HyperlinkedModelSerializer):
+    file = FileSerializer(read_only=True)
+    metadata = serializers.SerializerMethodField('get_metadata')
+
+    def get_metadata(self, obj):
+      return {
+        metadata.key: metadata.value
+        for metadata in obj.metadata.all()
+      }
+
+    class Meta:
+        model = PlayoutHistory
+        fields = '__all__'
+        read_only_fields = ['metadata']
 
 class PlayoutHistoryTemplateSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

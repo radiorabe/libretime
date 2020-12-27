@@ -247,7 +247,7 @@ class PlayoutHistory(models.Model):
 
 
 class PlayoutHistoryMetadata(models.Model):
-    history = models.ForeignKey(PlayoutHistory, models.DO_NOTHING)
+    history = models.ForeignKey(PlayoutHistory, models.DO_NOTHING, related_name="metadata")
     key = models.CharField(max_length=128)
     value = models.CharField(max_length=128)
 

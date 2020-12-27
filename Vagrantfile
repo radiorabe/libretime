@@ -3,6 +3,14 @@
 
 Vagrant.configure("2") do |config|
 
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.qemu_use_session = false
+    libvirt.uri = 'qemu:///system'
+    libvirt.system_uri = 'qemu:///system'
+    libvirt.management_network_device = 'virbr0'
+    libvirt.sound_type = 'ich6'
+  end
+
   # libretime web interface
   config.vm.network "forwarded_port", guest: 8080, host:8080
   # icecast2
@@ -21,7 +29,7 @@ Vagrant.configure("2") do |config|
   if Dir.exist?("/System/Volumes/Data")
       nfsPath = "/System/Volumes/Data" + Dir.pwd
   end
-  config.vm.synced_folder nfsPath, "/vagrant", type: "nfs"
+  config.vm.synced_folder nfsPath, "/vagrant", type: "nfs", nfs_udp: false
   # private network for nfs
   config.vm.network "private_network", ip: "192.168.10.100"
 
