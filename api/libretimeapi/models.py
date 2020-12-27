@@ -1,13 +1,7 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 import hashlib
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser
+from .managers import UserManager
 
 
 class SmartBlock(models.Model):
@@ -430,23 +424,6 @@ USER_TYPE_CHOICES = (
     (ADMIN, 'Admin'),
 )
 
-class UserManager(BaseUserManager):
-    def create_user(self, username, type, email, first_name, last_name, password):
-        user = self.model(username=username,
-                          type=type,
-                          email=email,
-                          first_name=first_name,
-                          last_name=last_name)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, email, first_name, last_name, password):
-        user = self.create_user(username, ADMIN, email, first_name, last_name, password)
-        return user
-
-    def get_by_natural_key(self, username):
-        return self.get(username=username)
 
 class User(AbstractBaseUser):
     username = models.CharField(db_column='login', unique=True, max_length=255)
