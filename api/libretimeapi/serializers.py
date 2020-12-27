@@ -204,11 +204,6 @@ class ShowRebroadcastSerializer(serializers.HyperlinkedModelSerializer):
         model = ShowRebroadcast
         fields = '__all__'
 
-class SmembSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Smemb
-        fields = '__all__'
-
 class StreamSettingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = StreamSetting

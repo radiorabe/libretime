@@ -409,18 +409,6 @@ class ShowRebroadcast(models.Model):
         db_table = 'cc_show_rebroadcast'
 
 
-class Smemb(models.Model):
-    id = models.IntegerField(primary_key=True)
-    uid = models.IntegerField()
-    gid = models.IntegerField()
-    level = models.IntegerField()
-    mid = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cc_smemb'
-
-
 class StreamSetting(models.Model):
     keyname = models.CharField(primary_key=True, max_length=64)
     value = models.CharField(max_length=255, blank=True, null=True)

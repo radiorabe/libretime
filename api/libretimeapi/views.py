@@ -135,10 +135,6 @@ class ShowRebroadcastViewSet(viewsets.ModelViewSet):
     queryset = ShowRebroadcast.objects.all()
     serializer_class = ShowRebroadcastSerializer
 
-class SmembViewSet(viewsets.ModelViewSet):
-    queryset = Smemb.objects.all()
-    serializer_class = SmembSerializer
-
 class StreamSettingViewSet(viewsets.ModelViewSet):
     queryset = StreamSetting.objects.all()
     serializer_class = StreamSettingSerializer
