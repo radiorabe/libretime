@@ -7,46 +7,10 @@ var AIRTIME = (function(AIRTIME) {
     mod = AIRTIME.history;
     
     var $historyContentDiv;
-    
-    var oTableTools = {
-        "sSwfPath": baseUrl+"js/datatables/plugin/TableTools-2.1.5/swf/copy_csv_xls_pdf.swf",
-        "aButtons": [
-             {
-                 "sExtends": "copy",
-                 "fnComplete": function(nButton, oConfig, oFlash, text) {
-                     var lines = text.split('\n').length,
-                         len = this.s.dt.nTFoot === null ? lines-1 : lines-2,
-                         plural = (len==1) ? "" : "s";
-                     alert(sprintf($.i18n._('Copied %s row%s to the clipboard'), len, plural));
-                 },
-                 //set because only the checkbox row is not sortable.
-                 "mColumns": "sortable"
-             },
-             {
-                 "sExtends": "csv",
-                 "fnClick": setFlashFileName,
-                 //set because only the checkbox row is not sortable.
-                 "mColumns": "sortable"
-             },
-             {
-                 "sExtends": "pdf",
-                 "fnClick": setFlashFileName,
-                 "sPdfOrientation": "landscape",
-                 //set because only the checkbox row is not sortable.
-                 "mColumns": "sortable"
-             },
-             {
-                 "sExtends": "print",
-                 "sInfo" : sprintf($.i18n._("%sPrint view%sPlease use your browser's print function to print this table. Press escape when finished."), "<h6>", "</h6><p>"),
-                 //set because only the checkbox row is not sortable.
-                 "mColumns": "sortable"
-             }
-         ]
-    };
-    
+        
     var lengthMenu = [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, $.i18n._("All")]];
     
-    var sDom = 'l<"dt-process-rel"r><"H"T><"dataTables_scrolling"t><"F"ip>';
+    var sDom = 'l<"dt-process-rel"r><"H"><"dataTables_scrolling"t><"F"ip>';
     
     var selectedLogItems = {};
     
@@ -154,25 +118,6 @@ var AIRTIME = (function(AIRTIME) {
             filename = filename+".csv";
         }
         return filename;
-    }
-
-    function setFlashFileName( nButton, oConfig, oFlash ) {
-        var filename = getFileName(oConfig.sExtends);
-        oFlash.setFileName( filename );
-        
-        if (oConfig.sExtends == "pdf") {
-            this.fnSetText( oFlash,
-                "title:"+ this.fnGetTitle(oConfig) +"\n"+
-                "message:"+ oConfig.sPdfMessage +"\n"+
-                "colWidth:"+ this.fnCalcColRatios(oConfig) +"\n"+
-                "orientation:"+ oConfig.sPdfOrientation +"\n"+
-                "size:"+ oConfig.sPdfSize +"\n"+
-                "--/TableToolsOpts--\n" +
-                this.fnGetTableData(oConfig));
-        }
-        else {
-            this.fnSetText(oFlash, this.fnGetTableData(oConfig));
-        }
     }
     
     /* This callback can be used for all history tables */
@@ -298,7 +243,6 @@ var AIRTIME = (function(AIRTIME) {
 				"</button>" +
 			"</div>");
 
-
 		$menu.append("<div class='btn-group'>" +
             "<button class='btn btn-small dropdown-toggle' data-toggle='dropdown'>" +
                 $.i18n._("Select")+" <span class='caret'></span>" +
@@ -337,7 +281,6 @@ var AIRTIME = (function(AIRTIME) {
         oTable = $historyTableDiv.dataTable( {
             
             "aoColumns": columns,
-                          
             "bProcessing": true,
             "bServerSide": true,
             "sAjaxSource": baseUrl+"playouthistory/file-history-feed",
@@ -356,8 +299,7 @@ var AIRTIME = (function(AIRTIME) {
             "sPaginationType": "full_numbers",
             "bJQueryUI": true,
             "bAutoWidth": true,
-            "sDom": sDom, 
-            "oTableTools": oTableTools
+            "sDom": sDom,
         });
         oTable.fnSetFilteringDelay(350);
        
@@ -429,8 +371,7 @@ var AIRTIME = (function(AIRTIME) {
             "sPaginationType": "full_numbers",
             "bJQueryUI": true,
             "bAutoWidth": true,
-            "sDom": sDom, 
-            "oTableTools": oTableTools
+            "sDom": sDom,
         });
         oTable.fnSetFilteringDelay(350);
         
