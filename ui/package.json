@@ -43,6 +43,7 @@
     "babel-preset-vue": "^2.0.2",
     "eslint": "^7.16.0",
     "eslint-plugin-vue": "^7.3.0",
+    "faker": "^5.1.0",
     "js-beautify": "^1.13.0",
     "miragejs": "^0.1.41",
     "postcss-prefix-selector": "^1.7.2",
@@ -75,7 +76,7 @@
       {
         "files": [
           "**/__tests__/*.{j,t}s?(x)",
-          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+          "**/*.spec.{j,t}s?(x)"
         ],
         "env": {
           "jest": true
