@@ -21,7 +21,6 @@ airtime_mvc/tests/log/*.log
 /docs/.gems/*
 Gemfile.lock
 api.log
-.DS_Store
 node_modules
 /dist
 .env.local

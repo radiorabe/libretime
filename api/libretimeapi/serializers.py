@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from rest_framework import serializers, viewsets
+from rest_framework import serializers
 from .models import *
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -214,11 +214,6 @@ class ShowRebroadcastSerializer(serializers.HyperlinkedModelSerializer):
         model = ShowRebroadcast
         fields = '__all__'
 
-class SmembSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Smemb
-        fields = '__all__'
-
 class StreamSettingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = StreamSetting
@@ -283,7 +278,3 @@ class TrackTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = TrackType
         fields = '__all__'
-
-class TrackTypeViewSet(viewsets.ModelViewSet):
-    queryset = TrackType.objects.all()
-    serializer_class = TrackTypeSerializer
