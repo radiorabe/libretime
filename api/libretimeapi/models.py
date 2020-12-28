@@ -260,7 +260,7 @@ class PlayoutHistoryTemplate(models.Model):
 
 
 class PlayoutHistoryTemplateField(models.Model):
-    template = models.ForeignKey(PlayoutHistoryTemplate, models.DO_NOTHING)
+    template = models.ForeignKey(PlayoutHistoryTemplate, models.DO_NOTHING, related_name="fields")
     name = models.CharField(max_length=128)
     label = models.CharField(max_length=128)
     type = models.CharField(max_length=128)

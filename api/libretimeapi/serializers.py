@@ -104,14 +104,15 @@ class PlayoutHistorySerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
         read_only_fields = ['metadata']
 
-class PlayoutHistoryTemplateSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = PlayoutHistoryTemplate
-        fields = '__all__'
-
 class PlayoutHistoryTemplateFieldSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PlayoutHistoryTemplateField
+        fields = '__all__'
+
+class PlayoutHistoryTemplateSerializer(serializers.HyperlinkedModelSerializer):
+    fields = PlayoutHistoryTemplateFieldSerializer(many=True)
+    class Meta:
+        model = PlayoutHistoryTemplate
         fields = '__all__'
 
 class PreferenceSerializer(serializers.HyperlinkedModelSerializer):
