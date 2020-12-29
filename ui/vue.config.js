@@ -20,6 +20,8 @@ module.exports = {
     proxy: 'http://localhost:8080'
   },
 
+  // this chain uses prefixer to wrap all css in a prefix that can be used with <div libretime-vue>,
+  // using this we can load the vue css into the legacy fronted without it overriding legacy CSS.
   chainWebpack: config => {
     const sassRule = config.module.rule('sass')
     const sassNormalRule = sassRule.oneOfs.get('normal')
