@@ -782,7 +782,7 @@ if [ -f /etc/airtime/airtime.conf ]; then
     
         set +e
         verbose "Stopping airtime services..."
-        systemInitCommand stop airtime_analyzer airtime-celery airtime-playout airtime-liquidsoap airtime-media-monitor
+        systemInitCommand stop libretime-analyzer airtime-celery airtime-playout airtime-liquidsoap airtime-media-monitor
         verbose "...Done"
 
         verbose "Disabling obsolete services..."
@@ -1014,8 +1014,8 @@ loudCmd "usermod -G ${web_user} -a celery"
 systemInitInstall libretime-celery
 verbose "...Done"
 
-verbose "\n * Installing airtime_analyzer..."
-loudCmd "$python_bin ${AIRTIMEROOT}/python_apps/airtime_analyzer/setup.py install --install-scripts=/usr/bin --no-init-script"
+verbose "\n * Installing libretime-analyzer..."
+loudCmd "$python_bin ${AIRTIMEROOT}/python_apps/airtime_analyzer/setup.py install --install-scripts=/usr/bin"
 systemInitInstall libretime-analyzer $web_user
 verbose "...Done"
 
