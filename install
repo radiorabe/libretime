@@ -1021,17 +1021,6 @@ verbose "...Done"
 
 verbose "\n * Installing API..."
 loudCmd "python3 ${AIRTIMEROOT}/api/setup.py install --install-scripts=/usr/bin"
-if [[ -e /etc/init.d/libretime-api ]]; then
-    verbose "Service libretime-api already exists - stopping."
-    loudCmd "systemctl stop libretime-api"
-fi
-ln -f -s /etc/init.d/uwsgi /etc/init.d/libretime-api
-sed -e "s@WEB_USER@${web_user}@g" \
-    -e "s@WEB_ROOT@${web_root}@g" \
-    ${AIRTIMEROOT}/installer/uwsgi/libretime-api.ini > /etc/uwsgi/apps-available/libretime-api.ini
-ln -f -s /etc/uwsgi/apps-available/libretime-api.ini /etc/uwsgi/apps-enabled/libretime-api.ini
-systemInitCommand disable uwsgi
-systemInitCommand enable libretime-api
 loudCmd "libretime-api collectstatic --clear --noinput"
 verbose "...Done"
 
